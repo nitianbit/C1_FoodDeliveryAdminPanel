@@ -1,0 +1,14 @@
+import React from 'react'
+import OrderCard from "../OrderCard"
+
+const Pending = () => {
+    return (
+        <div className='w-full grid md:grid-cols-1 lg:grid-cols-2  gap-4 overflow-y-auto'>
+            <OrderCard />
+            <OrderCard />
+            <OrderCard />
+        </div>
+    )
+}
+
+export default Pending
