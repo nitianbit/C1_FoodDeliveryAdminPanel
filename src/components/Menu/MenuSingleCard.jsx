@@ -1,12 +1,33 @@
 import { Card, CardHeader, CardBody, CardFooter, Typography } from "@material-tailwind/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
+import { MENUITEMS_ENDPOINTS } from "../../utils/constants";
+import { doDELETE, doGET } from "../../utils/httpUtil";
+import { useUserContext } from "../../context/UserContext";
 
-const MenuSingleCard = ({ open, handleOpen, item }) => {
-    useEffect(() => {
-        console.log(item)
-    }, [])
+const MenuSingleCard = ({ open, handleOpen, item, onSuccess }) => {
+
+    const [singleData, setSingleData] = useState({});
+    const { success, error } = useUserContext()
+
+    const deleteSingleItem = async () => {
+        try {
+
+            const response = await doDELETE(MENUITEMS_ENDPOINTS.DELETE(item?._id));
+
+            if (response?.data?.status >= 400) {
+                return error(response?.data?.message)
+            }
+
+            if (response?.data?.status == 200) {
+                onSuccess()
+                return success('Menu Item Deleted Successfully')
+            }
+
+        } catch (error) { }
+    };
+
     return (
         <Card className="w-full max-w-[20rem] shadow-lg">
             <CardHeader floated={false} color="blue-gray">
@@ -54,11 +75,13 @@ const MenuSingleCard = ({ open, handleOpen, item }) => {
                 <div className="text-xl flex items-center gap-3">
                     <span
                         className="text-green-800 cursor-pointer p-1 rounded-full hover:scale-125 duration-500"
-                        onClick={handleOpen}
+                        onClick={handleOpen(item?._id)}
                     >
                         <CiEdit />
                     </span>
-                    <span className="text-orange-700 cursor-pointer p-1 rounded-full hover:scale-125 duration-500"><MdDelete /></span>
+                    <span onClick={() => {
+                        deleteSingleItem()
+                    }} className="text-orange-700 cursor-pointer p-1 rounded-full hover:scale-125 duration-500"><MdDelete /></span>
                 </div>
             </CardFooter>
         </Card>

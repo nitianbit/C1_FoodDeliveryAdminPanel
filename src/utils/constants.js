@@ -19,5 +19,5 @@ export const MENUITEMS_ENDPOINTS = {
   GET_ALL: "/api/menuItems/get",
   GET_ID: (id) => `/api/menuItems/get/${id}`,
   UPDATE: (id) => `/api/menuItems/update/${id}`,
-  DELETE: "/api/menuItems/delete"
+  DELETE: (id) => `/api/menuItems/delete/${id}`
 }

@@ -1,15 +1,35 @@
 import { Button, Input } from '@material-tailwind/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useUserContext } from '../context/UserContext';
 import { MENUITEMS_ENDPOINTS } from '../utils/constants';
-import { doPOST } from '../utils/httpUtil';
+import { doGET, doPOST } from '../utils/httpUtil';
 
-const FoodForm = ({ handleOpen, formData, setFormData }) => {
+const FoodForm = ({ handleOpen, formData, setFormData, onSuccess, open }) => {
     const { success, error } = useUserContext()
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
+
+
+    const getCurrentMenuItems = async (e) => {
+        try {
+            const response = await doGET(MENUITEMS_ENDPOINTS.GET_ID(open?._id));
+
+            if (response?.data?.status >= 400) {
+                return error(response?.data?.message)
+            }
+            if (response?.data?.status == 200) {
+                setFormData(response?.data?.data)
+            }
+        } catch (error) { }
+    };
+
+    useEffect(() => {
+        if (open?._id) {
+            getCurrentMenuItems();
+        }
+    }, [open?._id])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -27,6 +47,7 @@ const FoodForm = ({ handleOpen, formData, setFormData }) => {
 
             if (response?.data?.status == 200) {
                 handleOpen()
+                onSuccess()
                 return success(response?.data?.message)
             }
 
@@ -35,7 +56,9 @@ const FoodForm = ({ handleOpen, formData, setFormData }) => {
 
     return (
         <div className=" bg-white rounded-md my-5">
-            <h1 className="text-sm my-2 text-center uppercase text-gray-900">Add Food Details</h1>
+            <h1 className="text-sm my-2 text-center uppercase text-gray-900">
+                {open?._id ? `Edit` : "Add"} Food Details
+            </h1>
             <form
                 className="mt-2 mb-2 w-full mx-auto px-4"
                 onSubmit={handleSubmit}

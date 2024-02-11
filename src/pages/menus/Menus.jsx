@@ -13,9 +13,18 @@ import { MENUITEMS_ENDPOINTS } from "../../utils/constants";
 import { doGET } from '../../utils/httpUtil';
 
 const Menus = () => {
-    const [open, setOpen] = useState(false);
+    const [open, setOpen] = useState({
+        visible: false,
+        _id: null
+    });
     const [data, setData] = useState([]);
-    const handleOpen = () => setOpen(!open);
+    const handleOpen = (id = null) => {
+        setOpen(prev => ({
+            ...prev,
+            _id: id,
+            visible: !open?.visible
+        }))
+    };
 
     const [currentMenuItem, setCurrentMenuItem] = useState({
         name: '',
@@ -39,7 +48,7 @@ const Menus = () => {
 
     return (
         <>
-            <AddItemDialog currentMenuItem={currentMenuItem} setCurrentMenuItem={setCurrentMenuItem} open={open} handleOpen={handleOpen} />
+            <AddItemDialog onSuccess={getAllMenuItems} currentMenuItem={currentMenuItem} setCurrentMenuItem={setCurrentMenuItem} open={open} handleOpen={handleOpen} />
             <Card className="w-full text-gray-900 mt-7 h-[82vh]" floated={false} shadow={false}>
                 <Card floated={false} shadow={false} className="rounded-none">
                     <div className="mb-8 flex items-center justify-between gap-8">
@@ -60,10 +69,9 @@ const Menus = () => {
 
                 </Card>
                 <CardBody className="overflow-y-auto px-0 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 -mt-8">
-
                     {data?.map((item, index) => (
                         <div key={index}>
-                            <MenuSingleCard item={item} open={open} handleOpen={handleOpen} />
+                            <MenuSingleCard onSuccess={getAllMenuItems} item={item} open={open} handleOpen={handleOpen} />
                         </div>
                     ))}
 
