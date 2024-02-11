@@ -9,7 +9,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
 
-const ProfileMenu = () => {
+const ProfileMenu = ({handleOpen,edithandleOpen}) => {
     const { logout } = useUserContext()
     const navigate = useNavigate()
     return (
@@ -39,7 +39,7 @@ const ProfileMenu = () => {
                         />
                     </svg>
 
-                    <Typography variant="small" className="font-medium tracking-wide">
+                    <Typography variant="small" className="font-medium tracking-wide" onClick={handleOpen}>
                         My Profile
                     </Typography>
                 </MenuItem>
@@ -59,7 +59,7 @@ const ProfileMenu = () => {
                         />
                     </svg>
 
-                    <Typography variant="small" className="font-medium tracking-wide">
+                    <Typography variant="small" className="font-medium tracking-wide" onClick={edithandleOpen}>
                         Edit Profile
                     </Typography>
                 </MenuItem>

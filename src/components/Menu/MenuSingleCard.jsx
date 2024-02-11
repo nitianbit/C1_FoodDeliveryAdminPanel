@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
 
-const MenuSingleCard = ({ open, handleOpen, item }) => {
+const MenuSingleCard = ({ handleOpen, confirmhandleOpen, item }) => {
     useEffect(() => {
         console.log(item)
     }, [])
@@ -58,7 +58,12 @@ const MenuSingleCard = ({ open, handleOpen, item }) => {
                     >
                         <CiEdit />
                     </span>
-                    <span className="text-orange-700 cursor-pointer p-1 rounded-full hover:scale-125 duration-500"><MdDelete /></span>
+                    <span 
+                        className="text-orange-700 cursor-pointer p-1 rounded-full hover:scale-125 duration-500"
+                        onClick={confirmhandleOpen}
+                    >
+                        <MdDelete />
+                    </span>
                 </div>
             </CardFooter>
         </Card>
