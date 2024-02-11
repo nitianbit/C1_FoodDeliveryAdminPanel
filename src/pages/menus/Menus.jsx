@@ -8,14 +8,38 @@ import {
 } from "@material-tailwind/react";
 import MenuSingleCard from '../../components/Menu/MenuSingleCard'
 import AddItemDialog from '../../components/Dialog/AddItemDialog';
+import { useEffect, useState } from "react";
+import { MENUITEMS_ENDPOINTS } from "../../utils/constants";
+import { doGET } from '../../utils/httpUtil';
 
 const Menus = () => {
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
+    const [data, setData] = useState([]);
     const handleOpen = () => setOpen(!open);
+
+    const [currentMenuItem, setCurrentMenuItem] = useState({
+        name: '',
+        description: '',
+        price: '',
+    });
+
+
+    const getAllMenuItems = async (e) => {
+        try {
+            const response = await doGET(MENUITEMS_ENDPOINTS.GET_ALL);
+            if (response?.data?.status == 200) {
+                setData(response?.data?.data)
+            }
+        } catch (error) { }
+    };
+
+    useEffect(() => {
+        getAllMenuItems()
+    }, [currentMenuItem])
 
     return (
         <>
-            <AddItemDialog open={open} handleOpen={handleOpen} />
+            <AddItemDialog currentMenuItem={currentMenuItem} setCurrentMenuItem={setCurrentMenuItem} open={open} handleOpen={handleOpen} />
             <Card className="w-full text-gray-900 mt-7 h-[82vh]" floated={false} shadow={false}>
                 <Card floated={false} shadow={false} className="rounded-none">
                     <div className="mb-8 flex items-center justify-between gap-8">
@@ -36,31 +60,13 @@ const Menus = () => {
 
                 </Card>
                 <CardBody className="overflow-y-auto px-0 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 -mt-8">
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
-                    <MenuSingleCard open={open} handleOpen={handleOpen}/>
+
+                    {data?.map((item, index) => (
+                        <div key={index}>
+                            <MenuSingleCard item={item} open={open} handleOpen={handleOpen} />
+                        </div>
+                    ))}
+
                 </CardBody>
 
             </Card>
