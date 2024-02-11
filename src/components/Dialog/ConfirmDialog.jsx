@@ -11,7 +11,6 @@ const ConfirmDialog = ({open,handleOpen}) => {
  
   return (
     <>
-      <Button onClick={handleOpen}>Notification</Button>
       <Dialog open={open} handler={handleOpen}>
         
         <DialogBody divider className="grid place-items-center gap-4">

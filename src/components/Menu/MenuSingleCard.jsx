@@ -6,7 +6,7 @@ import { MENUITEMS_ENDPOINTS } from "../../utils/constants";
 import { doDELETE, doGET } from "../../utils/httpUtil";
 import { useUserContext } from "../../context/UserContext";
 
-const MenuSingleCard = ({ open, handleOpen, item, onSuccess }) => {
+const MenuSingleCard = ({ open, handleOpen, item, onSuccess ,confirmhandleOpen}) => {
 
     const [singleData, setSingleData] = useState({});
     const { success, error } = useUserContext()
@@ -28,10 +28,7 @@ const MenuSingleCard = ({ open, handleOpen, item, onSuccess }) => {
         } catch (error) { }
     };
 
-    const MenuSingleCard = ({ handleOpen, confirmhandleOpen, item }) => {
-        useEffect(() => {
-            console.log(item)
-        }, [])
+    
         return (
             <Card className="w-full max-w-[20rem] shadow-lg">
                 <CardHeader floated={false} color="blue-gray">
