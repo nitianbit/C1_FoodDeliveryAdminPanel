@@ -79,13 +79,13 @@ const SideNavbar = () => {
                         <Typography color="blue-gray" className="mr-auto font-normal">
                             Orders
                         </Typography>
-                        <ListItemSuffix>
+                        {/* <ListItemSuffix>
                             <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
-                        </ListItemSuffix>
+                        </ListItemSuffix> */}
                     </ListItem>
                 </NavLink>
 
-                <NavLink to="/dashboard/users">
+                {/* <NavLink to="/dashboard/users">
                     <ListItem>
                         <ListItemPrefix>
                             <UserCircleIcon className="h-5 w-5" />
@@ -94,7 +94,7 @@ const SideNavbar = () => {
                             Users
                         </Typography>
                     </ListItem>
-                </NavLink>
+                </NavLink> */}
 
                 {/* 
                 <ListItem>

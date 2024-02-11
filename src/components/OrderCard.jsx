@@ -22,8 +22,8 @@ const OrderCard = ({ item, updateOrder, status }) => {
     >
       <div className='flex items-center justify-between' shadow={false}>
         <div className=''>
-          <span className='font-bold'>OrderId : </span>
-          <span>123456</span>
+          <span className='font-bold'>Name : </span>
+          <span>{item?.name}</span>
         </div>
         <div className='text-xs'>
           <span className='font-bold'>Order Date : </span>
@@ -33,21 +33,21 @@ const OrderCard = ({ item, updateOrder, status }) => {
       <div className='flex items-center justify-between gap-4'>
         <div className='flex-1  flex items-center gap-2'>
           <div className="flex items-center ">
-            <Avatar
-              variant="circular"
-              alt="user 1"
-              className=" hover:z-10 focus:z-10"
-              src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1480&q=80"
-            />
+            <span className='font-bold'>Items : </span>
+            {item?.items?.map((menuItems, i) => {
+              return <span>
+                {menuItems?.name ? menuItems?.name : ""} : {menuItems?.quantity ? menuItems?.quantity : 0}
+              </span>
+            })}
+
           </div>
-          <div>
-            {item?.name}
-          </div>
+
         </div>
+
         <div className='flex items-center justify-end'>
           <div>
-            <span className='font-bold'>Payment Mode : </span>
-            <span>{item?.status}</span>
+            <span className='font-bold'>Payment Status : </span>
+            <span>{item?.status == "Pending" ? "Pending" : "Completed"}</span>
           </div>
         </div>
       </div>
