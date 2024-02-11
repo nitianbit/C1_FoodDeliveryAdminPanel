@@ -11,13 +11,13 @@ import AddItemDialog from '../../components/Dialog/AddItemDialog';
 import { useEffect, useState } from "react";
 import { MENUITEMS_ENDPOINTS } from "../../utils/constants";
 import { doGET } from '../../utils/httpUtil';
+import ConfirmDialog from '../../components/Dialog/ConfirmDialog';
 
 const Menus = () => {
     const [open, setOpen] = useState({
         visible: false,
         _id: null
     });
-    const [data, setData] = useState([]);
     const handleOpen = (id = null) => {
         setOpen(prev => ({
             ...prev,
@@ -25,6 +25,11 @@ const Menus = () => {
             visible: !open?.visible
         }))
     };
+    const [data, setData] = useState([]);
+    // const [open, setOpen] = useState(false);
+    const [confirmOpen, setConfirmOpen] = useState(false);
+    // const handleOpen = () => setOpen(!open);
+    const confirmhandleOpen = () => setConfirmOpen(!confirmOpen);
 
     const [currentMenuItem, setCurrentMenuItem] = useState({
         name: '',
@@ -48,7 +53,8 @@ const Menus = () => {
 
     return (
         <>
-            <AddItemDialog onSuccess={getAllMenuItems} currentMenuItem={currentMenuItem} setCurrentMenuItem={setCurrentMenuItem} open={open} handleOpen={handleOpen} />
+            <AddItemDialog currentMenuItem={currentMenuItem} setCurrentMenuItem={setCurrentMenuItem} open={open} handleOpen={handleOpen} />
+            <ConfirmDialog open={confirmOpen} handleOpen={confirmhandleOpen} />
             <Card className="w-full text-gray-900 mt-7 h-[82vh]" floated={false} shadow={false}>
                 <Card floated={false} shadow={false} className="rounded-none">
                     <div className="mb-8 flex items-center justify-between gap-8">
@@ -72,12 +78,13 @@ const Menus = () => {
                     {data?.map((item, index) => (
                         <div key={index}>
                             <MenuSingleCard onSuccess={getAllMenuItems} item={item} open={open} handleOpen={handleOpen} />
-                        </div>
+                            <MenuSingleCard item={item} open={open} handleOpen={handleOpen} confirmhandleOpen={confirmhandleOpen} />
+                        </div >
                     ))}
 
-                </CardBody>
+                </CardBody >
 
-            </Card>
+            </Card >
         </>
     )
 }

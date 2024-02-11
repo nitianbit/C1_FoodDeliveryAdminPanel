@@ -9,13 +9,13 @@ const AdminLayout = () => {
     const navigate = useNavigate()
 
     const isLoggedIn = localStorage.getItem('isLoggedIn')
-    useEffect(() => {
+    // useEffect(() => {
 
-        if (!isLoggedIn) {
-            navigate('/')
-            error('Not Authorized')
-        }
-    }, [])
+    //     if (!isLoggedIn) {
+    //         navigate('/')
+    //         error('Not Authorized')
+    //     }
+    // }, [])
 
     return (
         <div className='w-screen h-screen overflow-hidden'>
