@@ -2,9 +2,9 @@ import { Button, Input } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react';
 import { useUserContext } from '../context/UserContext';
 import { MENUITEMS_ENDPOINTS } from '../utils/constants';
-import { doGET, doPOST } from '../utils/httpUtil';
+import { doGET, doPOST, doPUT } from '../utils/httpUtil';
 
-const FoodForm = ({ handleOpen, formData, setFormData, onSuccess, open }) => {
+const FoodForm = ({ handleOpen, formData, setFormData, onSuccess, open, editId, setEditId }) => {
     const { success, error } = useUserContext()
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -14,7 +14,7 @@ const FoodForm = ({ handleOpen, formData, setFormData, onSuccess, open }) => {
 
     const getCurrentMenuItems = async (e) => {
         try {
-            const response = await doGET(MENUITEMS_ENDPOINTS.GET_ID(open?._id));
+            const response = await doGET(MENUITEMS_ENDPOINTS.GET_ID(editId));
 
             if (response?.data?.status >= 400) {
                 return error(response?.data?.message)
@@ -26,10 +26,10 @@ const FoodForm = ({ handleOpen, formData, setFormData, onSuccess, open }) => {
     };
 
     useEffect(() => {
-        if (open?._id) {
+        if (editId) {
             getCurrentMenuItems();
         }
-    }, [open?._id])
+    }, [editId])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -38,8 +38,13 @@ const FoodForm = ({ handleOpen, formData, setFormData, onSuccess, open }) => {
             return error('Please Enter all required Fields');
         }
         try {
+            let response;
 
-            const response = await doPOST(MENUITEMS_ENDPOINTS.CREATE, formData);
+            if (editId) {
+                response = await doPUT(MENUITEMS_ENDPOINTS.UPDATE(editId), formData);
+            } else {
+                response = await doPOST(MENUITEMS_ENDPOINTS.CREATE, formData);
+            }
 
             if (response?.data?.status >= 400) {
                 return error(response?.data?.message)
@@ -48,6 +53,8 @@ const FoodForm = ({ handleOpen, formData, setFormData, onSuccess, open }) => {
             if (response?.data?.status == 200) {
                 handleOpen()
                 onSuccess()
+                setEditId(null)
+                setFormData({})
                 return success(response?.data?.message)
             }
 
@@ -57,7 +64,7 @@ const FoodForm = ({ handleOpen, formData, setFormData, onSuccess, open }) => {
     return (
         <div className=" bg-white rounded-md my-5">
             <h1 className="text-sm my-2 text-center uppercase text-gray-900">
-                {open?._id ? `Edit` : "Add"} Food Details
+                {editId ? `Edit` : "Add"} Food Details
             </h1>
             <form
                 className="mt-2 mb-2 w-full mx-auto px-4"

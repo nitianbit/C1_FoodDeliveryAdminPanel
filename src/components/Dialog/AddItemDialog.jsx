@@ -5,7 +5,7 @@ import {
 } from "@material-tailwind/react";
 import FoodForm from "../FoodForm";
 import { GrFormClose } from "react-icons/gr";
-const AddItemDialog = ({ open, handleOpen, currentMenuItem, setCurrentMenuItem, onSuccess }) => {
+const AddItemDialog = ({ open, handleOpen, currentMenuItem, setCurrentMenuItem, onSuccess, editId, setEditId }) => {
 
 
     return (
@@ -24,7 +24,7 @@ const AddItemDialog = ({ open, handleOpen, currentMenuItem, setCurrentMenuItem, 
                         <GrFormClose className="text-xl font-extrabold" />
                     </span>
 
-                    <FoodForm formData={currentMenuItem} open={open} onSuccess={onSuccess} setFormData={setCurrentMenuItem} handleOpen={handleOpen} />
+                    <FoodForm formData={currentMenuItem} open={open} onSuccess={onSuccess} setFormData={setCurrentMenuItem} handleOpen={handleOpen} setEditId={setEditId} editId={editId} />
                 </DialogBody>
 
             </Dialog>

@@ -4,10 +4,33 @@ import {
     CardBody,
     Typography,
 } from "@material-tailwind/react";
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { GrFormClose } from 'react-icons/gr'
+import { USER } from '../../utils/constants';
+import { useUserContext } from '../../context/UserContext';
+import { doGET } from '../../utils/httpUtil';
 
 const ProfileDialog = ({ open, handleOpen }) => {
+
+    const { success, error } = useUserContext()
+    const [data, setData] = useState({})
+
+    const getCurrentUser = async (e) => {
+        try {
+            const response = await doGET(USER.CURRENT_USER);
+
+            if (response?.data?.status >= 400) {
+                return error(response?.data?.message)
+            }
+            if (response?.data?.status == 200) {
+                setData(response?.data?.data)
+            }
+        } catch (error) { }
+    };
+
+    useEffect(() => {
+        getCurrentUser()
+    }, [])
     return (
         <Dialog
             open={open}
@@ -43,7 +66,7 @@ const ProfileDialog = ({ open, handleOpen }) => {
                                     Name
                                 </Typography>
                                 <Typography color="blue-gray" className="font-medium">
-                                    Ankit Singh
+                                    {data?.name}
                                 </Typography>
                             </div>
                             <div className="mb-2 flex items-center justify-between">
@@ -51,25 +74,25 @@ const ProfileDialog = ({ open, handleOpen }) => {
                                     Email
                                 </Typography>
                                 <Typography color="blue-gray" className="font-medium">
-                                    ankitsingh@gmail.com
+                                    {data?.email}
                                 </Typography>
                             </div>
                             <div className="mb-2 flex items-center justify-between">
                                 <Typography color="blue-gray" className="font-medium">
-                                    PhoneNo.
+                                    Role
                                 </Typography>
                                 <Typography color="blue-gray" className="font-medium">
-                                    +91 9876543210
+                                    {data?.role}
                                 </Typography>
                             </div>
-                            <Typography
+                            {/* <Typography
                                 variant="small"
                                 color="gray"
                                 className="font-normal opacity-75"
                             >
                                 With plenty of talk and listen time, voice-activated Siri access, and
                                 an available wireless charging case.
-                            </Typography>
+                            </Typography> */}
                         </Card>
                     </CardBody>
 

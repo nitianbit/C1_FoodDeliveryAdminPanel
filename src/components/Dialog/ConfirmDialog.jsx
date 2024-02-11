@@ -6,13 +6,13 @@ import {
   DialogFooter,
   Typography,
 } from "@material-tailwind/react";
- 
-const ConfirmDialog = ({open,handleOpen}) => {
- 
+
+const ConfirmDialog = ({ open, handleOpen, confirm }) => {
+
   return (
     <>
       <Dialog open={open} handler={handleOpen}>
-        
+
         <DialogBody divider className="grid place-items-center gap-4">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -26,17 +26,20 @@ const ConfirmDialog = ({open,handleOpen}) => {
               clipRule="evenodd"
             />
           </svg>
-          
+
           <Typography color="red" variant="h4">
             Are you sure want to delete ?
           </Typography>
-          
+
         </DialogBody>
         <DialogFooter className="space-x-2">
           <Button variant="text" color="blue-gray" onClick={handleOpen}>
             close
           </Button>
-          <Button variant="gradient" color="red" onClick={handleOpen}>
+          <Button variant="gradient" color="red" onClick={() => {
+            handleOpen()
+            confirm()
+          }}>
             Ok, Got it
           </Button>
         </DialogFooter>
