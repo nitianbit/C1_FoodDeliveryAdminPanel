@@ -41,9 +41,9 @@ const SideNavbar = () => {
                     Sidebar
                 </Typography>
             </div>
-            <div className="p-2">
+            {/* <div className="p-2">
                 <Input icon={<MagnifyingGlassIcon className="h-5 w-5" />} label="Search" />
-            </div>
+            </div> */}
             <List className="mt-5">
 
                 <NavLink to="/dashboard">

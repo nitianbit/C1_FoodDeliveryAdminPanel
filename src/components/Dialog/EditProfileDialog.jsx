@@ -8,21 +8,9 @@ import { USER } from '../../utils/constants';
 import { useUserContext } from '../../context/UserContext';
 
 const EditProfileDialog = ({ open, handleOpen }) => {
-    const { error } = useUserContext()
+    const { error, user, setUser } = useUserContext()
     const [data, setData] = useState({})
 
-    const getCurrentUser = async (e) => {
-        try {
-            const response = await doGET(USER.CURRENT_USER);
-
-            if (response?.data?.status >= 400) {
-                return error(response?.data?.message)
-            }
-            if (response?.data?.status == 200) {
-                setData(response?.data?.data)
-            }
-        } catch (error) { }
-    };
 
     const updateCurrentUser = async (e) => {
         if (data?.password !== data?.confirmPassword) {
@@ -35,14 +23,16 @@ const EditProfileDialog = ({ open, handleOpen }) => {
                 return error(response?.data?.message)
             }
             if (response?.data?.status == 200) {
-                setData(response?.data?.data)
+                setUser(response?.data?.data)
             }
         } catch (error) { }
     };
 
+
     useEffect(() => {
-        getCurrentUser()
-    }, [])
+        setData(user)
+    }, [user])
+
 
     return (
         <Dialog

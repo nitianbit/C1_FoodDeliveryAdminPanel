@@ -14,7 +14,7 @@ import { AUTH_ENDPOINTS, CONTENT_TYPE_URL_ENCODED } from "../../utils/constants"
 import { useUserContext } from "../../context/UserContext";
 
 const Login = () => {
-    const { success, error, setLoggedIn } = useUserContext()
+    const { success, error, setLoggedIn, setUser, user } = useUserContext()
     const navigate = useNavigate()
     const isLoggedIn = localStorage.getItem('isLoggedIn')
 
@@ -35,7 +35,8 @@ const Login = () => {
                 navigate('/dashboard')
                 setLoggedIn(true)
 
-                localStorage.setItem('token', response?.data?.data)
+                localStorage.setItem('token', response?.data?.data?.token)
+                setUser(response?.data?.data?.user)
                 localStorage.setItem('isLoggedIn', true)
                 return success(response?.data?.message)
             }

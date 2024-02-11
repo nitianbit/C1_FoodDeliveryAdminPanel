@@ -72,7 +72,7 @@ const Menus = () => {
 
     useEffect(() => {
         getAllMenuItems()
-    }, [currentMenuItem])
+    }, [])
 
     return (
         <>

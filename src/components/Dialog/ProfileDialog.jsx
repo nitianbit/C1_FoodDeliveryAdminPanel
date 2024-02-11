@@ -12,25 +12,9 @@ import { doGET } from '../../utils/httpUtil';
 
 const ProfileDialog = ({ open, handleOpen }) => {
 
-    const { success, error } = useUserContext()
-    const [data, setData] = useState({})
+    const { success, error, user } = useUserContext()
 
-    const getCurrentUser = async (e) => {
-        try {
-            const response = await doGET(USER.CURRENT_USER);
 
-            if (response?.data?.status >= 400) {
-                return error(response?.data?.message)
-            }
-            if (response?.data?.status == 200) {
-                setData(response?.data?.data)
-            }
-        } catch (error) { }
-    };
-
-    useEffect(() => {
-        getCurrentUser()
-    }, [])
     return (
         <Dialog
             open={open}
@@ -66,7 +50,7 @@ const ProfileDialog = ({ open, handleOpen }) => {
                                     Name
                                 </Typography>
                                 <Typography color="blue-gray" className="font-medium">
-                                    {data?.name}
+                                    {user?.name}
                                 </Typography>
                             </div>
                             <div className="mb-2 flex items-center justify-between">
@@ -74,7 +58,7 @@ const ProfileDialog = ({ open, handleOpen }) => {
                                     Email
                                 </Typography>
                                 <Typography color="blue-gray" className="font-medium">
-                                    {data?.email}
+                                    {user?.email}
                                 </Typography>
                             </div>
                             <div className="mb-2 flex items-center justify-between">
@@ -82,7 +66,7 @@ const ProfileDialog = ({ open, handleOpen }) => {
                                     Role
                                 </Typography>
                                 <Typography color="blue-gray" className="font-medium">
-                                    {data?.role}
+                                    {user?.role}
                                 </Typography>
                             </div>
                             {/* <Typography

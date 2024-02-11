@@ -11,10 +11,10 @@ const DashboardSingleItem = (props) => {
                     <span>{title}</span>
                 </div>
                 <div>
-                    <img src={src} className='w-16' />
+                    {/* <img src={src} className='w-16' /> */}
                 </div>
             </div>
-            <div className={`contrast-125 border-t-2 w-full text-center p-1 pb-2 `}>More Info</div>
+            {/* <div className={`contrast-125 border-t-2 w-full text-center p-1 pb-2 `}>More Info</div> */}
         </div>
     )
 }

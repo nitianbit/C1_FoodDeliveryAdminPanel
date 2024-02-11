@@ -15,6 +15,7 @@ export const AUTH_ENDPOINTS = {
 
 export const USER = {
   CURRENT_USER: `/api/users/get`,
+  DASHBOARD: `/api/users/get/dashboard`,
   UPDATE_USER: `/api/users/update`
 }
 
@@ -29,8 +30,8 @@ export const MENUITEMS_ENDPOINTS = {
 
 export const ORDER_ENDPOINTS = {
   CREATE: "/api/order/create",
-  GET_ALL: "/api/order/get",
+  GET_ALL: (status) => `/api/order/get?status=${status}`,
   GET_ID: (id) => `/api/order/get/${id}`,
-  UPDATE: (id) => `/api/order/update/${id}`,
+  UPDATE: (id) => `/api/order/update/${id}/status`,
   DELETE: (id) => `/api/order/delete/${id}`
 }
