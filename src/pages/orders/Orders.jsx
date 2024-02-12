@@ -152,8 +152,18 @@ const Orders = () => {
             </Tab>
           ))}
 
+        </div >
+        <div className="flex items-center gap-1">
+          {data.map(({ label, value, icon }) => (
+            <Tab key={value} value={value} className="" onClick={() => setStatus(value)}>
+              <div className="flex items-center gap-2">
+                {React.createElement(icon, { className: "w-5 h-5" })}
+                {label}
+              </div>
+            </Tab>
+          ))}
         </div>
-      </TabsHeader>
+      </TabsHeader >
       <TabsBody className="h-[78vh] overflow-y-auto">
         {data.map(({ value, Component }) => (
           <TabPanel key={value} value={value}>
@@ -161,7 +171,7 @@ const Orders = () => {
           </TabPanel>
         ))}
       </TabsBody>
-    </Tabs>
+    </Tabs >
   )
 }
 

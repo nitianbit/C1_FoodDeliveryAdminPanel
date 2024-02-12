@@ -56,15 +56,9 @@ const OrderCard = ({ item, updateOrder, status }) => {
           <span className='font-bold'>Price : </span>
           <span> Rs {item?.totalAmount}</span>
         </div>
-        <div className="flex items-center gap-4">
-          {/* <NavLink href="#">
-            <Button variant="outlined" size='sm' color='orange'>Reject</Button>
-          </NavLink> */}
-          <NavLink href="#">
-            <Button variant="outlined" size='sm' color='green' onClick={() => {
-              updateOrder(item?._id, changeStatus)
-            }}>{changeStatus}</Button>
-          </NavLink>
+        <div className="rounded-lg shadow-md text-black flex items-center gap-4 bg-orange-50 py-1 px-2">
+          <span className='font-bold'>Status : </span>
+          <span>Pending</span>
         </div>
       </div>
     </Card>
