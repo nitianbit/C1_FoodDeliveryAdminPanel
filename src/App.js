@@ -22,7 +22,7 @@ const router = createBrowserRouter(createRoutesFromElements(
 
         <Route path="dashboard" element={<AdminLayout />}>
             <Route index element={<Dashboard />} />
-            <Route path="users" element={<Users />} />
+            {/* <Route path="users" element={<Users />} /> */}
             <Route path="orders">
                 <Route index element={<Orders />} />
                 <Route path=":id" element={<SingleOrderDetail />} />
