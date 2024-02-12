@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Tabs,
   TabsHeader,
@@ -35,6 +35,8 @@ const Orders = () => {
       desc: <Delievered />
     },
   ]
+  const [status,setStatus] = useState("pending")
+ console.log(status)
   return (
     <Tabs value="pending" className="mt-7 h-[82vh]">
       <TabsHeader className="flex items-center justify-between">
@@ -42,7 +44,7 @@ const Orders = () => {
 
           <div className="flex items-center gap-1">
             {data.map(({ label, value, icon }) => (
-              <Tab key={value} value={value} className="">
+              <Tab key={value} value={value} className="" onClick={()=>setStatus(value)}>
                 <div className="flex items-center gap-2">
                   {React.createElement(icon, { className: "w-5 h-5" })}
                   {label}

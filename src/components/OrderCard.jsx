@@ -1,11 +1,10 @@
-import { Avatar, Button, Card } from '@material-tailwind/react'
+import { Avatar, Card } from '@material-tailwind/react'
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 
 const OrderCard = () => {
   return (
     <Card 
-      className='shadow-lg bg-white border border-gray-900 p-4 space-y-1 min-w-[300px] text-sm' 
+      className='shadow-lg bg-white border border-gray-900 p-4 space-y-3 min-w-[300px] text-sm' 
       shadow={false}
     >
       
@@ -45,13 +44,9 @@ const OrderCard = () => {
           <span className='font-bold'>Price : </span>
           <span> Rs 500.000</span>
         </div>
-        <div className="flex items-center gap-4">
-          <NavLink href="#">
-            <Button variant="outlined" size='sm' color='orange'>Reject</Button>
-          </NavLink>
-          <NavLink href="#">
-            <Button variant="outlined" size='sm' color='green'>Confirm</Button>
-          </NavLink>
+        <div className="rounded-lg shadow-md text-black flex items-center gap-4 bg-orange-50 py-1 px-2">
+        <span className='font-bold'>Status : </span>
+          <span>Pending</span>
         </div>
       </div>
     </Card>
