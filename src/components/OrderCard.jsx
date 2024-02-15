@@ -34,7 +34,7 @@ const OrderCard = ({ item, status, orderId }) => {
       </div>
       <div className='flex items-center justify-between gap-4'>
         <div className='flex-1  flex items-center gap-2'>
-          <div className="flex items-center ">
+          {/* <div className="flex items-center ">
             <span className='font-bold'>Items : </span>
             {item?.items?.map((menuItems, i) => {
               return <span>
@@ -42,7 +42,7 @@ const OrderCard = ({ item, status, orderId }) => {
               </span>
             })}
 
-          </div>
+          </div> */}
 
         </div>
 

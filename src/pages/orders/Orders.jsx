@@ -82,21 +82,21 @@ const Orders = () => {
 
 
 
-  const updateOrder = async (id, orderStatus) => {
-    try {
-      let response = await doPUT(ORDER_ENDPOINTS.UPDATE(id), { status: orderStatus });
+  // const updateOrder = async (id, orderStatus) => {
+  //   try {
+  //     let response = await doPUT(ORDER_ENDPOINTS.UPDATE(id), { status: orderStatus });
 
-      if (response?.data?.status >= 400) {
-        return error(response?.data?.message)
-      }
+  //     if (response?.data?.status >= 400) {
+  //       return error(response?.data?.message)
+  //     }
 
-      if (response?.data?.status == 200) {
-        getAllOrders()
-        return success(response?.data?.message)
-      }
+  //     if (response?.data?.status == 200) {
+  //       getAllOrders()
+  //       return success(response?.data?.message)
+  //     }
 
-    } catch (error) { }
-  };
+  //   } catch (error) { }
+  // };
 
 
   useEffect(() => {
@@ -135,12 +135,11 @@ const Orders = () => {
 
 
 
-
   return (
     <Tabs value="pending" className="mt-7 h-[82vh]">
       <TabsHeader className="flex items-center justify-between">
         <h1 className='text-3xl font-bold tracking-wide'>Orders Detail</h1>
-        <div className="flex items-center gap-1">
+        {/* <div className="flex items-center gap-1">
           {data.map(({ label, value, icon }) => (
             <Tab key={value} value={value} className="" onClick={() => {
               setStatus(label)
@@ -152,7 +151,7 @@ const Orders = () => {
             </Tab>
           ))}
 
-        </div >
+        </div > */}
         <div className="flex items-center gap-1">
           {data.map(({ label, value, icon }) => (
             <Tab key={value} value={value} className="" onClick={() => setStatus(label)}>
@@ -167,7 +166,7 @@ const Orders = () => {
       <TabsBody className="h-[78vh] overflow-y-auto">
         {data.map(({ value, Component }) => (
           <TabPanel key={value} value={value}>
-            {<Component orderDetails={orderDetails} updateOrder={updateOrder} status={status} onSuccess={getAllOrders} />}
+            {<Component orderDetails={orderDetails} status={status} onSuccess={getAllOrders} />}
           </TabPanel>
         ))}
       </TabsBody>
