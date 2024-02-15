@@ -18,7 +18,7 @@ const Register = () => {
     const navigate = useNavigate()
     const [data, setData] = useState({});
     const signUp = async () => {
-        if ((!data?.name || !data?.email || !data?.Password || !data?.confirmPassword)) {
+        if ((!data?.name || !data?.email || !data?.password || !data?.confirmPassword)) {
             return error('Please Enter all required Fields');
         } else if (data?.password != data?.confirmPassword) {
             return error('Password did not match with Confirm Password')
