@@ -1,9 +1,10 @@
 import { Avatar, Button, Card } from '@material-tailwind/react'
 import React, { useEffect, useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useNavigate } from 'react-router-dom'
 import moment from 'moment/moment'
 
-const OrderCard = ({ item, updateOrder, status }) => {
+const OrderCard = ({ item, status, orderId }) => {
+  const navigate = useNavigate()
   const formatDateTime = (timestamp) => {
     return moment(timestamp * 1000).format('YYYY-MM-DD HH:mm:ss a');
   }
@@ -19,6 +20,7 @@ const OrderCard = ({ item, updateOrder, status }) => {
     <Card
       className='shadow-lg bg-white border border-gray-900 p-4 space-y-1 min-w-[300px] text-sm'
       shadow={false}
+      onClick={() => navigate(`${orderId}`)}
     >
       <div className='flex items-center justify-between' shadow={false}>
         <div className=''>
@@ -58,7 +60,7 @@ const OrderCard = ({ item, updateOrder, status }) => {
         </div>
         <div className="rounded-lg shadow-md text-black flex items-center gap-4 bg-orange-50 py-1 px-2">
           <span className='font-bold'>Status : </span>
-          <span>Pending</span>
+          <span>{item?.status}</span>
         </div>
       </div>
     </Card>

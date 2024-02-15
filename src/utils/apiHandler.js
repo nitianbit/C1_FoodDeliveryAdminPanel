@@ -2,9 +2,6 @@
 import { BASE_URL, CONTENT_TYPE_URL_ENCODED } from "./constants";
 
 
-
-
-
 export const ApiHandler = async ({
   endPoint,
   method,
@@ -12,6 +9,7 @@ export const ApiHandler = async ({
   token = "",
   content_type = ""
 }) => {
+  // const navigate = useNavigate()
   const acceptType = "application/json";
   const contentType = content_type ? content_type :
     reqParam instanceof FormData ? "multipart/form-data" : "application/json";
@@ -64,7 +62,11 @@ export const ApiHandler = async ({
     console.log(e);
   } finally {
     // console.log(response)
-
+    if (response?.status == 401) {
+      localStorage.clear()
+      window.location.pathname = "/"
+      // window.location.reload()
+    }
     if (response) {
       const resContentType = response.headers.get("content-type");
 

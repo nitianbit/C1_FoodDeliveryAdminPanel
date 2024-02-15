@@ -35,7 +35,9 @@ export const UserProvider = ({ children }) => {
     };
 
     useEffect(() => {
-        getCurrentUser()
+        if (localStorage.getItem('isLoggedIn')) {
+            getCurrentUser()
+        }
     }, [])
 
 

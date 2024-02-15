@@ -155,7 +155,7 @@ const Orders = () => {
         </div >
         <div className="flex items-center gap-1">
           {data.map(({ label, value, icon }) => (
-            <Tab key={value} value={value} className="" onClick={() => setStatus(value)}>
+            <Tab key={value} value={value} className="" onClick={() => setStatus(label)}>
               <div className="flex items-center gap-2">
                 {React.createElement(icon, { className: "w-5 h-5" })}
                 {label}
