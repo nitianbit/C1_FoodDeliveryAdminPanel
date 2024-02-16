@@ -120,6 +120,7 @@ export async function apiHeaders(
     reqParam instanceof FormData
       ? {
         // "Content-Type": "multipart/form-data",
+        "x-api-key": "web",
         token: token !== null ? `${token}` : "",
       }
       : {

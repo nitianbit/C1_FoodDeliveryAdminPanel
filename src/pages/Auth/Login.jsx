@@ -25,7 +25,7 @@ const Login = () => {
             return error('Please Enter all required Fields');
         }
         try {
-            const response = await doPOST(AUTH_ENDPOINTS.LOGIN, data);
+            const response = await doPOST(AUTH_ENDPOINTS.LOGIN, { ...data, type: "web" });
 
             if (response?.data?.status >= 400) {
                 return error(response?.data?.message)
