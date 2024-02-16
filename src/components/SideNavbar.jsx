@@ -5,40 +5,28 @@ import {
     List,
     ListItem,
     ListItemPrefix,
-    ListItemSuffix,
-    Chip,
-    Input,
+    
 } from "@material-tailwind/react";
 import {
     PresentationChartBarIcon,
     ShoppingBagIcon,
-    UserCircleIcon,
     InboxIcon,
-    PowerIcon,
 } from "@heroicons/react/24/solid";
-import {
-    MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
+
 import { NavLink } from "react-router-dom";
 import { useUserContext } from "../context/UserContext";
 
-// const ListItems = [
-//     { title: "Dashboard", icon: "PresentationChartBarIcon"},
-//     { title: "Menu Item", icon: "ShoppingBagIcon"},
-//     { title: "Orders", icon: "InboxIcon"},
-//     { title: "Users", icon: "UserCircleIcon"},
-//     { title: "Logout", icon: "PowerIcon"},
-// ]
+
 
 const SideNavbar = () => {
     const { logout } = useUserContext()
 
     return (
-        <Card className="h-[100%] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 border-r-2">
+        <Card className="h-[100%] w-full max-w-[15rem] p-4 shadow-xl shadow-blue-gray-900/5 border-r-2">
             <div className="mb-2 flex items-center gap-4 p-4">
-                <img src="https://docs.material-tailwind.com/img/logo-ct-dark.png" alt="brand" className="h-8 w-8" />
-                <Typography variant="h5" color="blue-gray">
-                    Sidebar
+                <img src="/logo.jpg" alt="brand" className="h-8 w-8" />
+                <Typography variant="h6" color="blue-gray">
+                    ChapatiBasket
                 </Typography>
             </div>
             {/* <div className="p-2">

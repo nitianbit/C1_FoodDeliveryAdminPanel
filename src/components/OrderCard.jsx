@@ -18,7 +18,7 @@ const OrderCard = ({ item, status, orderId }) => {
 
   return (
     <Card
-      className='shadow-lg bg-white border border-gray-900 p-4 space-y-1 min-w-[300px] text-sm'
+      className='shadow-lg bg-white border border-gray-900 p-4 space-y-1 min-w-[300px] text-sm cursor-pointer'
       shadow={false}
       onClick={() => navigate(`${orderId}`)}
     >
@@ -49,7 +49,7 @@ const OrderCard = ({ item, status, orderId }) => {
         <div className='flex items-center justify-end'>
           <div>
             <span className='font-bold'>Payment Status : </span>
-            <span>{item?.status == "Pending" ? "Pending" : "Completed"}</span>
+            <span >{item?.status == "Pending" ? "Pending" : "Completed"}</span>
           </div>
         </div>
       </div>
@@ -58,7 +58,7 @@ const OrderCard = ({ item, status, orderId }) => {
           <span className='font-bold'>Price : </span>
           <span> Rs {item?.totalAmount}</span>
         </div>
-        <div className="rounded-lg shadow-md text-black flex items-center gap-4 bg-orange-50 py-1 px-2">
+        <div className={`${item?.status === "Pending" ? "bg-red-50" :(item?.status === "Confirm" ? "bg-green-50" : "bg-blue-50")} rounded-lg shadow-md text-black flex items-center gap-4 py-1 px-2`}>
           <span className='font-bold'>Status : </span>
           <span>{item?.status}</span>
         </div>
