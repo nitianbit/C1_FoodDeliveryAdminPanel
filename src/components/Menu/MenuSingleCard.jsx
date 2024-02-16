@@ -1,22 +1,31 @@
 import { Card, CardHeader, CardBody, CardFooter, Typography } from "@material-tailwind/react";
+import { useEffect, useState } from "react";
 import { CiEdit } from "react-icons/ci";
 import { MdDelete } from "react-icons/md";
+import { MENUITEMS_ENDPOINTS } from "../../utils/constants";
+import { doDELETE, doGET } from "../../utils/httpUtil";
+import { useUserContext } from "../../context/UserContext";
 
-const MenuSingleCard = ({ open, handleOpen }) => {
+const MenuSingleCard = ({ open, handleOpen, item, onSuccess, confirmhandleOpen, setEditId, setDeleteId }) => {
+
+    const [singleData, setSingleData] = useState({});
+
+
+
     return (
         <Card className="w-full max-w-[20rem] shadow-lg">
             <CardHeader floated={false} color="blue-gray">
-                <img
+                {/* <img
                     src="/kdahipaneer.jpg"
                     alt="paneer"
                     className="w-full object-cover"
-                />
+                /> */}
                 <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
             </CardHeader>
             <CardBody>
                 <div className="mb-1 flex items-center justify-between">
                     <Typography variant="h6" color="blue-gray" className="font-bold tracking-wide">
-                        Kdhaii Paneer
+                        {item?.name}
                     </Typography>
                     <Typography
                         color="blue-gray"
@@ -38,23 +47,39 @@ const MenuSingleCard = ({ open, handleOpen }) => {
                     </Typography>
                 </div>
                 <Typography color="gray" className="text-sm">
-                    Cottage cheese, bell pepper, garam masala, kasuri methi
+                    {item?.description}
                 </Typography>
-                
+
             </CardBody>
             <CardFooter className="pt-3 flex items-center justify-between">
                 <div className="text-black">
                     <span className="font-bold">Price : </span>
-                    <span className="text-sm">Rs 500.00</span>
+                    <span className="text-sm">Rs {item?.price}</span>
                 </div>
                 <div className="text-xl flex items-center gap-3">
-                    <span 
+                    <span
                         className="text-green-800 cursor-pointer p-1 rounded-full hover:scale-125 duration-500"
-                        onClick={handleOpen}
+                        onClick={() => {
+                            setEditId(item?._id)
+                            handleOpen()
+                        }}
                     >
                         <CiEdit />
                     </span>
-                    <span className="text-orange-700 cursor-pointer p-1 rounded-full hover:scale-125 duration-500"><MdDelete /></span>
+                    {/* <span onClick={() => {
+                        deleteSingleItem()
+                    }} className="text-orange-700 cursor-pointer p-1 rounded-full hover:scale-125 duration-500"><MdDelete /></span> */}
+                    <span
+                        className="text-orange-700 cursor-pointer p-1 rounded-full hover:scale-125 duration-500"
+                        onClick={
+                            () => {
+                                confirmhandleOpen()
+                                setDeleteId(item?._id)
+                            }
+                        }
+                    >
+                        <MdDelete />
+                    </span>
                 </div>
             </CardFooter>
         </Card>

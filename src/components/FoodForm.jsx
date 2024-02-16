@@ -1,56 +1,96 @@
 import { Button, Input } from '@material-tailwind/react';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useUserContext } from '../context/UserContext';
+import { MENUITEMS_ENDPOINTS } from '../utils/constants';
+import { doGET, doPOST, doPUT } from '../utils/httpUtil';
 
-const FoodForm = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        description: '',
-        rating: '',
-        price: '',
-        image: null,
-    });
-
+const FoodForm = ({ handleOpen, formData, setFormData, onSuccess, open, editId, setEditId }) => {
+    const { success, error } = useUserContext()
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleImageChange = (e) => {
-        const imageFile = e.target.files[0];
-        setFormData({ ...formData, image: imageFile });
+
+    const getCurrentMenuItems = async (e) => {
+        try {
+            const response = await doGET(MENUITEMS_ENDPOINTS.GET_ID(editId));
+
+            if (response?.data?.status >= 400) {
+                return error(response?.data?.message)
+            }
+            if (response?.data?.status == 200) {
+                setFormData(response?.data?.data)
+            }
+        } catch (error) { }
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Handle form submission here
-        console.log(formData);
+    useEffect(() => {
+        if (editId) {
+            getCurrentMenuItems();
+        }
+    }, [editId])
+
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+
+        if (!formData?.name || !formData?.description || !formData?.price) {
+            return error('Please Enter all required Fields');
+        }
+        try {
+            let response;
+
+            if (editId) {
+                response = await doPUT(MENUITEMS_ENDPOINTS.UPDATE(editId), formData);
+            } else {
+                response = await doPOST(MENUITEMS_ENDPOINTS.CREATE, formData);
+            }
+
+            if (response?.data?.status >= 400) {
+                return error(response?.data?.message)
+            }
+
+            if (response?.data?.status == 200) {
+                handleOpen()
+                onSuccess()
+                setEditId(null)
+                setFormData({})
+                return success(response?.data?.message)
+            }
+
+        } catch (error) { }
     };
 
     return (
         <div className=" bg-white rounded-md my-5">
-            <h1 className="text-sm my-2 text-center uppercase text-gray-900">Add Food Details</h1>
-            <form 
+            <h1 className="text-sm my-2 text-center uppercase text-gray-900">
+                {editId ? `Edit` : "Add"} Food Details
+            </h1>
+            <form
                 className="mt-2 mb-2 w-full mx-auto px-4"
                 onSubmit={handleSubmit}
             >
                 <div className="flex flex-col gap-6">
-                    <Input 
-                        label="Name" type="text" id="name" name="name" 
-                        value={formData.name} onChange={handleChange} 
+                    <Input
+                        required
+                        label="Name" type="text" id="name" name="name"
+                        value={formData?.name} onChange={handleChange}
                     />
                     <Input
+                        required
                         label="Description" type="text" id="description" name="description"
-                        value={formData.description} onChange={handleChange}
+                        value={formData?.description} onChange={handleChange}
                     />
                     <Input
+                        required
                         label="Price" type="text" id="price" name="price"
-                        value={formData.price} onChange={handleChange}
+                        value={formData?.price} onChange={handleChange}
                     />
-                    <Input
+                    {/* <Input
                         label="Rating" type="text" id="rating" name="rating"
                         value={formData.rating} onChange={handleChange}
                     />
-                    <input label="Add Image" type="file" id="image" name="image" onChange={handleImageChange} className="w-full border rounded-md px-4 py-2" accept="image/*" required />
+                    <input label="Add Image" type="file" id="image" name="image" onChange={handleImageChange} className="w-full border rounded-md px-4 py-2" accept="image/*" required /> */}
                     <Button type="submit" className=" w-full tracking-wider">
                         Submit
                     </Button>

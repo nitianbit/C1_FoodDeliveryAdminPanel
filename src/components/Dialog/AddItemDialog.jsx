@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     Dialog,
     DialogBody,
 } from "@material-tailwind/react";
 import FoodForm from "../FoodForm";
 import { GrFormClose } from "react-icons/gr";
-const AddItemDialog = ({ open, handleOpen }) => {
+const AddItemDialog = ({ open, handleOpen, currentMenuItem, setCurrentMenuItem, onSuccess, editId, setEditId }) => {
+
+
     return (
         <>
             <Dialog
@@ -19,10 +21,10 @@ const AddItemDialog = ({ open, handleOpen }) => {
                 <DialogBody>
                     <span
                         className="absolute cursor-pointer top-3 right-5 text-gray-900" onClick={handleOpen}>
-                        <GrFormClose className="text-xl font-extrabold"/>
+                        <GrFormClose className="text-xl font-extrabold" />
                     </span>
 
-                    <FoodForm />
+                    <FoodForm formData={currentMenuItem} open={open} onSuccess={onSuccess} setFormData={setCurrentMenuItem} handleOpen={handleOpen} setEditId={setEditId} editId={editId} />
                 </DialogBody>
 
             </Dialog>

@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react"
 import DashboardSingleItem from "../components/DashboardSingleItem"
+import { USER } from "../utils/constants"
+import { doGET } from "../utils/httpUtil"
 
 const items = [
   { color: "bg-blue-300", title: "Total Place Order", number: 7, src: "/shop.png" },
@@ -10,7 +13,27 @@ const items = [
   { color: "bg-indigo-300", title: "Total Enquiry", number: 11025, src: "/questions.png" },
 ]
 
+
 const Dashboard = () => {
+
+  const [data, setData] = useState();
+
+  const getData = async () => {
+    try {
+      const response = await doGET(USER?.DASHBOARD);
+
+      if (response?.data?.status == 200) {
+        setData(response?.data?.data)
+      }
+    } catch (error) {
+
+    }
+  }
+
+  useEffect(() => {
+    getData()
+  }, [])
+
   return (
     <div>
       <div className='space-y-6 mt-6'>
@@ -19,13 +42,15 @@ const Dashboard = () => {
           <div></div>
         </div>
         <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5'>
-          {
+          <DashboardSingleItem color="bg-blue-300" title="Total Orders This Month" number={data?.totalOrders} />
+          <DashboardSingleItem color="bg-lime-300" title="Total Menu Items" number={data?.totalMenuItems} />
+          {/* {
             items.map((item, id) => (
               <div key={id}>
                 <DashboardSingleItem color={item.color} title={item.title} number={item.number} src={item.src} />
               </div>
             ))
-          }
+          } */}
 
         </div>
       </div>

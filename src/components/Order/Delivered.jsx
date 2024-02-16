@@ -1,7 +1,7 @@
 import React from 'react'
 import OrderCard from "../OrderCard"
 
-const Confirmed = ({ updateOrder, orderDetails, status }) => {
+const Delivered = ({ updateOrder, orderDetails, status }) => {
   return (
     <div className='w-full grid md:grid-cols-1 lg:grid-cols-2  gap-4 overflow-y-auto'>
       {orderDetails?.map((item, indx) => {
@@ -11,4 +11,4 @@ const Confirmed = ({ updateOrder, orderDetails, status }) => {
   )
 }
 
-export default Confirmed
+export default Delivered

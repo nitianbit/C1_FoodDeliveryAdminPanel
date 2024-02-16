@@ -6,8 +6,12 @@ import {
     Avatar,
     Typography,
 } from "@material-tailwind/react";
+import { useNavigate } from "react-router-dom";
+import { useUserContext } from "../context/UserContext";
 
-const ProfileMenu = () => {
+const ProfileMenu = ({handleOpen,edithandleOpen}) => {
+    const { logout } = useUserContext()
+    const navigate = useNavigate()
     return (
         <Menu>
             <MenuHandler>
@@ -35,7 +39,7 @@ const ProfileMenu = () => {
                         />
                     </svg>
 
-                    <Typography variant="small" className="font-medium tracking-wide">
+                    <Typography variant="small" className="font-medium tracking-wide" onClick={handleOpen}>
                         My Profile
                     </Typography>
                 </MenuItem>
@@ -55,12 +59,12 @@ const ProfileMenu = () => {
                         />
                     </svg>
 
-                    <Typography variant="small" className="font-medium tracking-wide">
+                    <Typography variant="small" className="font-medium tracking-wide" onClick={edithandleOpen}>
                         Edit Profile
                     </Typography>
                 </MenuItem>
-            
-                
+
+
                 <hr className="my-2 border-blue-gray-50" />
                 <MenuItem className="flex items-center gap-2 ">
                     <svg
@@ -77,7 +81,10 @@ const ProfileMenu = () => {
                             fill="#90A4AE"
                         />
                     </svg>
-                    <Typography variant="small" className="font-medium tracking-wide">
+                    <Typography onClick={() => {
+                        navigate('/')
+                        logout()
+                    }} variant="small" className="font-medium tracking-wide">
                         Sign Out
                     </Typography>
                 </MenuItem>

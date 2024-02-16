@@ -20,6 +20,7 @@ import {
     MagnifyingGlassIcon,
 } from "@heroicons/react/24/outline";
 import { NavLink } from "react-router-dom";
+import { useUserContext } from "../context/UserContext";
 
 // const ListItems = [
 //     { title: "Dashboard", icon: "PresentationChartBarIcon"},
@@ -30,7 +31,7 @@ import { NavLink } from "react-router-dom";
 // ]
 
 const SideNavbar = () => {
-    
+    const { logout } = useUserContext()
 
     return (
         <Card className="h-[100%] w-full max-w-[20rem] p-4 shadow-xl shadow-blue-gray-900/5 border-r-2">
@@ -40,11 +41,11 @@ const SideNavbar = () => {
                     Sidebar
                 </Typography>
             </div>
-            <div className="p-2">
+            {/* <div className="p-2">
                 <Input icon={<MagnifyingGlassIcon className="h-5 w-5" />} label="Search" />
-            </div>
+            </div> */}
             <List className="mt-5">
-                
+
                 <NavLink to="/dashboard">
                     <ListItem className="" >
                         <ListItemPrefix>
@@ -55,7 +56,7 @@ const SideNavbar = () => {
                         </Typography>
                     </ListItem>
                 </NavLink>
-    
+
                 <NavLink to="/dashboard/menus">
                     <ListItem>
                         <ListItemPrefix>
@@ -66,9 +67,6 @@ const SideNavbar = () => {
                         </Typography>
                     </ListItem>
                 </NavLink>
-    
-        
-
 
                 <NavLink to="/dashboard/orders">
                     <ListItem>
@@ -78,13 +76,13 @@ const SideNavbar = () => {
                         <Typography color="blue-gray" className="mr-auto font-normal">
                             Orders
                         </Typography>
-                        <ListItemSuffix>
+                        {/* <ListItemSuffix>
                             <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
-                        </ListItemSuffix>
+                        </ListItemSuffix> */}
                     </ListItem>
                 </NavLink>
-    
-                <NavLink to="/dashboard/users">
+
+                {/* <NavLink to="/dashboard/users">
                     <ListItem>
                         <ListItemPrefix>
                             <UserCircleIcon className="h-5 w-5" />
@@ -93,17 +91,19 @@ const SideNavbar = () => {
                             Users
                         </Typography>
                     </ListItem>
-                </NavLink>
-    
+                </NavLink> */}
 
+                {/* 
                 <ListItem>
                     <ListItemPrefix>
                         <PowerIcon className="h-5 w-5" />
                     </ListItemPrefix>
-                    <Typography color="blue-gray" className="mr-auto font-normal">
+                    <Typography onClick={() => {
+                        logout()
+                    }} color="blue-gray" className="mr-auto font-normal">
                         Logout
                     </Typography>
-                </ListItem>
+                </ListItem> */}
             </List>
 
         </Card>
