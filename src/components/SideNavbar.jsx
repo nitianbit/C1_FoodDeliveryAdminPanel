@@ -11,6 +11,7 @@ import {
     PresentationChartBarIcon,
     ShoppingBagIcon,
     InboxIcon,
+    UserCircleIcon,
 } from "@heroicons/react/24/solid";
 
 import { NavLink } from "react-router-dom";
@@ -64,34 +65,21 @@ const SideNavbar = () => {
                         <Typography color="blue-gray" className="mr-auto font-normal">
                             Orders
                         </Typography>
-                        {/* <ListItemSuffix>
-                            <Chip value="14" size="sm" variant="ghost" color="blue-gray" className="rounded-full" />
-                        </ListItemSuffix> */}
+                        
                     </ListItem>
                 </NavLink>
 
-                {/* <NavLink to="/dashboard/users">
+                <NavLink to="/dashboard/drivers">
                     <ListItem>
                         <ListItemPrefix>
                             <UserCircleIcon className="h-5 w-5" />
                         </ListItemPrefix>
                         <Typography color="blue-gray" className="mr-auto font-normal">
-                            Users
+                            Drivers
                         </Typography>
                     </ListItem>
-                </NavLink> */}
+                </NavLink>
 
-                {/* 
-                <ListItem>
-                    <ListItemPrefix>
-                        <PowerIcon className="h-5 w-5" />
-                    </ListItemPrefix>
-                    <Typography onClick={() => {
-                        logout()
-                    }} color="blue-gray" className="mr-auto font-normal">
-                        Logout
-                    </Typography>
-                </ListItem> */}
             </List>
 
         </Card>

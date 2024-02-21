@@ -101,12 +101,12 @@ const Menus = () => {
                     {data?.map((item, index) => (
                         <div key={index}>
                             <MenuSingleCard setDeleteId={setDeleteId} setEditId={setEditId} onSuccess={getAllMenuItems} item={item} open={open} handleOpen={handleOpen} confirmhandleOpen={confirmhandleOpen} />
-                        </div >
+                        </div>
                     ))}
 
-                </CardBody >
+                </CardBody>
 
-            </Card >
+            </Card>
         </>
     )
 }

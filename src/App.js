@@ -13,6 +13,7 @@ import Users from "./pages/users/Users";
 import Orders from "./pages/orders/Orders";
 import SingleOrderDetail from "./pages/orders/SingleOrderDetail";
 import Menus from "./pages/menus/Menus";
+import Drivers from "./pages/Drivers/Drivers";
 
 const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" >
@@ -30,6 +31,10 @@ const router = createBrowserRouter(createRoutesFromElements(
 
             <Route path="menus">
                 <Route index element={<Menus />} />
+            </Route>
+
+            <Route path="drivers">
+                <Route index element={<Drivers />} />
             </Route>
         </Route>
 

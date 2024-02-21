@@ -42,8 +42,8 @@ const Dashboard = () => {
           <div></div>
         </div>
         <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5'>
-          <DashboardSingleItem color="bg-blue-300" title="Total Orders This Month" number={data?.totalOrders} />
-          <DashboardSingleItem color="bg-lime-300" title="Total Menu Items" number={data?.totalMenuItems} />
+          <DashboardSingleItem color="bg-blue-300" title="Total Orders This Month" number={data?.totalOrders} src="/package-delivery.png"/>
+          <DashboardSingleItem color="bg-green-300" title="Total Menu Items" number={data?.totalMenuItems} src="shop.png"/>
           {/* {
             items.map((item, id) => (
               <div key={id}>

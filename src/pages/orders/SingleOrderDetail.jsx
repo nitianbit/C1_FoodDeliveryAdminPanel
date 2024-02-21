@@ -7,7 +7,11 @@ import { ORDER_ENDPOINTS } from '../../utils/constants';
 import { useUserContext } from '../../context/UserContext';
 import { TiTick } from "react-icons/ti";
 import moment from 'moment';
+import AddDriverDialog from '../../components/Dialog/AddDriverDialog';
+import DriverSelect from '../../components/driver/DriverSelect';
 const SingleOrderDetail = ({ order }) => {
+    
+    const [driverValue, setDriverValue] = React.useState("");
 
     const { id } = useParams()
     
@@ -38,6 +42,7 @@ const SingleOrderDetail = ({ order }) => {
             if (response?.data?.status == 200) {
                 // getCurrentMenuItems()
                 setCurrentOrder(response?.data?.data)
+                
                 return success(response?.data?.message)
             }
 
@@ -59,6 +64,7 @@ const SingleOrderDetail = ({ order }) => {
 
     return (
         <>
+            {/* <AddDriverDialog open={open} handleOpen={handleOpen} driverValue={driverValue} setDriverValue={setDriverValue}/> */}
             <div className='w-full h-[82vh] overflow-y-auto mt-5'>
                 <div className="py-14 px-4">
                     <div className='w-full md:flex items-center justify-between'>
@@ -126,7 +132,12 @@ const SingleOrderDetail = ({ order }) => {
                             </div>
                         </div>
                         <div className="bg-gray-50 dark:bg-gray-800 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
-                            <h3 className="text-xl  font-semibold leading-5 text-gray-800">Customer</h3>
+                            <div className='bg-white w-full my-5 space-y-3'>
+                            <h3 className="text-xl  font-semibold leading-5 text-gray-800">Select Driver</h3>
+                            <DriverSelect driverValue={driverValue} setDriverValue={setDriverValue}/>
+
+                            </div>
+                            <h3 className="text-xl  font-semibold leading-5 text-gray-800 mt-2">Customer</h3>
                             <div className="flex flex-col md:flex-row xl:flex-col justify-start items-stretch h-full w-full md:space-x-6 lg:space-x-8 xl:space-x-0">
                                 <div className="flex flex-col justify-start items-start flex-shrink-0">
                                     <div className="flex justify-center w-full md:justify-start items-center space-x-4 py-8 border-b border-gray-200">
