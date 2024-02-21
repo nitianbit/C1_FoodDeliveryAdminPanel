@@ -1,24 +1,24 @@
 import { Option, Select } from '@material-tailwind/react'
 import React from 'react'
 
-const DriverDetail = [
-    { name: "Rahul", "phoneNo": "9711648064" },
-    { name: "Ratan", "phoneNo": "9871862858" },
-    { name: "Gagan", "phoneNo": "7827852147" },
-    { name: "Mandeep", "phoneNo": "9971164333" }
-]
 
-const DriverSelect = ({driverValue,setDriverValue}) => {
+
+const DriverSelect = ({ driverValue, setDriverValue, allDrivers }) => {
     return (
         <Select
             label="Select Driver"
             size='sm'
             value={driverValue}
-            onChange={(val) => setDriverValue(val)}
+            onChange={(val) => {
+                setDriverValue(prev => ({
+                    ...prev,
+                    time: val
+                }))
+            }}
         >
             {
-                DriverDetail.map((item) => (
-                    <Option key={item} value={item}>{item.name} - {item.phoneNo}</Option>
+                (allDrivers ?? [])?.map((item, index) => (
+                    <Option key={index} value={item}>{item?.name ?? ""} - {item?.mob_no ?? ""}</Option>
                 ))
             }
 
