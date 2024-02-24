@@ -18,7 +18,7 @@ const DriverSelect = ({ driverValue, setDriverValue, allDrivers }) => {
         >
             {
                 (allDrivers ?? [])?.map((item, index) => (
-                    <Option key={index} value={item}>{item?.name ?? ""} - {item?.mob_no ?? ""}</Option>
+                    <Option key={index} value={item?._id}>{item?.name ?? ""} - {item?.mob_no ?? ""}</Option>
                 ))
             }
 

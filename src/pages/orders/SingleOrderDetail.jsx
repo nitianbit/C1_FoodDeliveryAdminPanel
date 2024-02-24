@@ -1,7 +1,7 @@
 
 import { Button, Input } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { doGET, doPUT } from '../../utils/httpUtil';
 import { DRIVER_ENDPOINTS, ORDER_ENDPOINTS } from '../../utils/constants';
 import { useUserContext } from '../../context/UserContext';
@@ -10,13 +10,13 @@ import moment from 'moment';
 import DriverSelect from '../../components/driver/DriverSelect';
 const SingleOrderDetail = ({ order }) => {
 
-    const [selectDriverValue, setSelectedDriverValue] = useState(null);
-    const [drivers, setDrivers] = useState(null)
-    const [time, setTime] = useState(null)
 
     const { id } = useParams()
 
-    const [currentOrder, setCurrentOrder] = useState({})
+    const [drivers, setDrivers] = useState(null)
+    const [currentOrder, setCurrentOrder] = useState({
+        driverInfo: ""
+    })
     const [currentOrderStatus, setCurrentOrderStatus] = useState("Pending")
     const { success, error } = useUserContext()
 
@@ -27,7 +27,7 @@ const SingleOrderDetail = ({ order }) => {
             if (response?.data?.status >= 400) {
                 return error(response?.data?.message)
             }
-            if (response?.data?.status == 200) {
+            if (response?.data?.status === 200) {
                 setCurrentOrder(response?.data?.data)
             }
         } catch (error) { }
@@ -53,7 +53,7 @@ const SingleOrderDetail = ({ order }) => {
     const getAllDrivers = async (e) => {
         try {
             const response = await doGET(DRIVER_ENDPOINTS.GET_ALL);
-            if (response?.data?.status == 200) {
+            if (response?.data?.status === 200) {
                 setDrivers(response?.data?.data)
             }
         } catch (error) { }
@@ -70,7 +70,7 @@ const SingleOrderDetail = ({ order }) => {
     }, [])
 
     useEffect(() => {
-        const status = currentOrder?.status == "Pending" ? "Confirm" : "Delivered"
+        const status = currentOrder?.status === "Pending" ? "Confirm" : "Delivered"
         setCurrentOrderStatus(status)
     }, [currentOrder?.status])
 
@@ -97,7 +97,7 @@ const SingleOrderDetail = ({ order }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
+                    <div className="mt-10 flex flex-col xl:flex-row justify-center items-stretch w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
                         <div className="flex flex-col justify-start items-start w-full space-y-4 md:space-y-6 xl:space-y-8">
                             <div className="flex flex-col justify-start items-start bg-gray-50 px-4 py-4 md:py-6 md:p-6 xl:p-8 w-full">
 
@@ -144,7 +144,7 @@ const SingleOrderDetail = ({ order }) => {
                         </div>
                         <div className="bg-gray-50 dark:bg-gray-800 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
                             <div className='bg-white w-full my-5 space-y-3'>
-                                <h4 className="text-lg  font-semibold leading-5 text-gray-800">Select Driver</h4>
+                                <h4 className="text-lg  font-semibold leading-5 text-gray-800">{currentOrder?.status === "Pending" ? `Select Driver` : 'Driver details'}</h4>
                                 {currentOrder?.status === "Pending" ? <DriverSelect driverValue={currentOrder?.driverInfo} setDriverValue={setCurrentOrder} allDrivers={drivers} /> : `${currentOrder?.driverInfo?.name} ${currentOrder?.driverInfo?.mob_no}`}
                                 <h4 className="text-lg  font-semibold leading-5 text-gray-800">Delivery Time</h4>
                                 {currentOrder?.status === "Pending" ? <Input
