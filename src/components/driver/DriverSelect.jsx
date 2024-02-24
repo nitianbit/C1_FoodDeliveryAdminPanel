@@ -1,5 +1,5 @@
 import { Option, Select } from '@material-tailwind/react'
-import React from 'react'
+import React, { useEffect } from 'react'
 
 
 
@@ -12,7 +12,7 @@ const DriverSelect = ({ driverValue, setDriverValue, allDrivers }) => {
             onChange={(val) => {
                 setDriverValue(prev => ({
                     ...prev,
-                    time: val
+                    driverInfo: val
                 }))
             }}
         >

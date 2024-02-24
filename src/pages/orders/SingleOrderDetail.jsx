@@ -7,7 +7,6 @@ import { DRIVER_ENDPOINTS, ORDER_ENDPOINTS } from '../../utils/constants';
 import { useUserContext } from '../../context/UserContext';
 import { TiTick } from "react-icons/ti";
 import moment from 'moment';
-import AddDriverDialog from '../../components/Dialog/AddDriverDialog';
 import DriverSelect from '../../components/driver/DriverSelect';
 const SingleOrderDetail = ({ order }) => {
 
@@ -36,13 +35,12 @@ const SingleOrderDetail = ({ order }) => {
 
     const updateOrder = async () => {
         try {
-            let response = await doPUT(ORDER_ENDPOINTS.UPDATE(id), { status: currentOrderStatus, driverInfo: currentOrder?.driverInfo, time: currentOrder?.time });
+            let response = await doPUT(ORDER_ENDPOINTS.UPDATE(id), { status: currentOrderStatus, driverInfo: currentOrder?.driverInfo, deliveryTime: currentOrder?.deliveryTime });
             if (response?.data?.status >= 400) {
                 return error(response?.data?.message)
             }
 
-            if (response?.data?.status == 200) {
-                // getCurrentMenuItems()
+            if (response?.data?.status === 200) {
                 setCurrentOrder(response?.data?.data)
 
                 return success(response?.data?.message)
@@ -87,13 +85,13 @@ const SingleOrderDetail = ({ order }) => {
                             <p className="text-base  font-medium leading-6 text-gray-600">{formatDateTime(currentOrder?.time)}</p>
                         </div>
                         <div className='space-y-2'>
-                            <h1 className="text-2xl text-center lg:text-3xl font-semibold leading-7 lg:leading-9 text-gray-800">Status</h1>
+                            <h1 className="text-2xl text-center lg:text-3xl font-semibold leading-7 lg:leading-9 text-gray-800">Update Order Status</h1>
                             <div className="flex items-center gap-5 ">
                                 {currentOrder?.status === "Delivered" ?
                                     <div className='text-blue-900 font-bold tracking-wide flex items-center'> <TiTick className='inline-flex text-2xl' />{currentOrder?.status}</div>
                                     :
-                                    <Button onClick={updateOrder} variant="outlined" size='sm' className={`border ${currentOrder?.status == "Pending" ? "text-red-600 border-red-600" : "text-green-600 border-green-600"}`}>
-                                        {currentOrder?.status}
+                                    <Button onClick={updateOrder} variant="outlined" size='sm' className={`border ${currentOrder?.status === "Pending" ? "text-red-600 border-red-600" : "text-green-600 border-green-600"}`}>
+                                        {currentOrder?.status === "Pending" ? "Confirm" : "Deliver"}
                                     </Button>
                                 }
                             </div>
@@ -147,19 +145,19 @@ const SingleOrderDetail = ({ order }) => {
                         <div className="bg-gray-50 dark:bg-gray-800 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-6 xl:p-8 flex-col">
                             <div className='bg-white w-full my-5 space-y-3'>
                                 <h4 className="text-lg  font-semibold leading-5 text-gray-800">Select Driver</h4>
-                                <DriverSelect driverValue={currentOrder?.driverInfo} setDriverValue={setCurrentOrder} allDrivers={setDrivers} />
+                                {currentOrder?.status === "Pending" ? <DriverSelect driverValue={currentOrder?.driverInfo} setDriverValue={setCurrentOrder} allDrivers={drivers} /> : `${currentOrder?.driverInfo?.name} ${currentOrder?.driverInfo?.mob_no}`}
                                 <h4 className="text-lg  font-semibold leading-5 text-gray-800">Delivery Time</h4>
-                                <Input
+                                {currentOrder?.status === "Pending" ? <Input
                                     label='Estimated Delivery Time'
                                     type='text'
-                                    value={currentOrder?.time ?? ""}
+                                    value={currentOrder?.deliveryTime ?? ""}
                                     onChange={(v) => {
                                         setCurrentOrder(prev => ({
                                             ...prev,
-                                            time: v.target?.value
+                                            deliveryTime: v.target?.value
                                         }))
                                     }}
-                                />
+                                /> : currentOrder?.deliveryTime}
 
                             </div>
                             <h3 className="text-xl  font-semibold leading-5 text-gray-800 mt-2">Customer</h3>
