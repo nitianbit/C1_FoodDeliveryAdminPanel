@@ -40,7 +40,7 @@ const ConfirmDialog = ({ open, handleOpen, confirm }) => {
             handleOpen()
             confirm()
           }}>
-            Ok, Got it
+            Yes
           </Button>
         </DialogFooter>
       </Dialog>

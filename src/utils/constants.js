@@ -36,3 +36,11 @@ export const ORDER_ENDPOINTS = {
   UPDATE: (id) => `/api/order/update/${id}/status`,
   DELETE: (id) => `/api/order/delete/${id}`
 }
+
+export const DRIVER_ENDPOINTS = {
+  CREATE: "/api/driver/create",
+  GET_ALL: `/api/driver/get`,
+  GET_ID: (id) => `/api/driver/get/${id}`,
+  UPDATE: (id) => `/api/driver/update/${id}`,
+  DELETE: (id) => `/api/driver/delete/${id}`
+}

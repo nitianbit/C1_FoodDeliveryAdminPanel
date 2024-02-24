@@ -66,9 +66,7 @@ const MenuSingleCard = ({ open, handleOpen, item, onSuccess, confirmhandleOpen, 
                     >
                         <CiEdit />
                     </span>
-                    {/* <span onClick={() => {
-                        deleteSingleItem()
-                    }} className="text-orange-700 cursor-pointer p-1 rounded-full hover:scale-125 duration-500"><MdDelete /></span> */}
+                    
                     <span
                         className="text-orange-700 cursor-pointer p-1 rounded-full hover:scale-125 duration-500"
                         onClick={
