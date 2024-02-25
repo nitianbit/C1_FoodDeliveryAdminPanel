@@ -31,8 +31,7 @@ const DriverSelect = ({ driverValue, setDriverValue }) => {
         <Select
             label="Select Driver"
             size='sm'
-            value={driverValue} // Assuming driverInfo is a property in driverValue
-            onChange={handleDriverChange} // Use a separate function to handle onChange
+            onChange={handleDriverChange}
         >
             {
                 (drivers ?? []).map((item, index) => (
