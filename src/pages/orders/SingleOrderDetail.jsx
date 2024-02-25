@@ -3,7 +3,7 @@ import { Button, Input } from '@material-tailwind/react';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { doGET, doPUT } from '../../utils/httpUtil';
-import { DRIVER_ENDPOINTS, ORDER_ENDPOINTS } from '../../utils/constants';
+import { ORDER_ENDPOINTS } from '../../utils/constants';
 import { useUserContext } from '../../context/UserContext';
 import { TiTick } from "react-icons/ti";
 import moment from 'moment';
@@ -13,14 +13,14 @@ const SingleOrderDetail = ({ order }) => {
 
     const { id } = useParams()
 
-    const [drivers, setDrivers] = useState(null)
+
     const [currentOrder, setCurrentOrder] = useState({
         driverInfo: ""
     })
     const [currentOrderStatus, setCurrentOrderStatus] = useState("Pending")
     const { success, error } = useUserContext()
 
-    const getCurrentMenuItems = async (e) => {
+    const getCurrentOrderDetails = async (e) => {
         try {
             const response = await doGET(ORDER_ENDPOINTS.GET_ID(id));
 
@@ -50,23 +50,12 @@ const SingleOrderDetail = ({ order }) => {
     };
 
 
-    const getAllDrivers = async (e) => {
-        try {
-            const response = await doGET(DRIVER_ENDPOINTS.GET_ALL);
-            if (response?.data?.status === 200) {
-                setDrivers(response?.data?.data)
-            }
-        } catch (error) { }
-    };
-
-
     const formatDateTime = (timestamp) => {
         return moment(timestamp * 1000).format('YYYY-MM-DD HH:mm:ss a');
     }
 
     useEffect(() => {
-        getCurrentMenuItems()
-        getAllDrivers()
+        getCurrentOrderDetails()
     }, [])
 
     useEffect(() => {
@@ -114,24 +103,24 @@ const SingleOrderDetail = ({ order }) => {
                                 <div className=" w-full bg-white">
                                     {currentOrder?.items?.map((oitem, oIndex) => (
                                         <div key={oIndex} className=" md:flex-row flex-col flex items-start justify-between w-full p-2 space-y-4 md:space-y-0">
-                                                <div className="w-full flex flex-col justify-start items-start space-y-2">
-                                                    <h3 className="text-lg font-semibold leading-6 text-gray-600">{oitem?.name ?? ""}</h3>
-                                                </div>
-                                                <div className="flex justify-between space-x-8 items-center w-full">
-                                                    <p className="text-lg leading-6 text-gray-600">{oitem?.price ?? 0}</p>
-                                                    <p className="text-lg leading-6 text-gray-600">{oitem?.quantity ?? 0}</p>
-                                                    <p className="text-lg leading-6 text-gray-600">{(oitem?.price ?? 0) * (oitem?.quantity ?? 0)} </p>
-                                                </div>
+                                            <div className="w-full flex flex-col justify-start items-start space-y-2">
+                                                <h3 className="text-lg font-semibold leading-6 text-gray-600">{oitem?.name ?? ""}</h3>
+                                            </div>
+                                            <div className="flex justify-between space-x-8 items-center w-full">
+                                                <p className="text-lg leading-6 text-gray-600">{oitem?.price ?? 0}</p>
+                                                <p className="text-lg leading-6 text-gray-600">{oitem?.quantity ?? 0}</p>
+                                                <p className="text-lg leading-6 text-gray-600">{(oitem?.price ?? 0) * (oitem?.quantity ?? 0)} </p>
+                                            </div>
                                         </div>
                                     ))}
                                 </div>
                             </div>
 
                             <div className="flex justify-center md:flex-row flex-col items-stretch w-full space-y-4 md:space-y-0 ">
-                            <div className="flex justify-between items-center w-full px-5">
-                                        <p className="text-lg  font-semibold leading-4 text-gray-900">Total</p>
-                                        <p className="text-lg  font-semibold leading-4 text-gray-800">Rs {currentOrder?.totalAmount}</p>
-                                    </div>
+                                <div className="flex justify-between items-center w-full px-5">
+                                    <p className="text-lg  font-semibold leading-4 text-gray-900">Total</p>
+                                    <p className="text-lg  font-semibold leading-4 text-gray-800">Rs {currentOrder?.totalAmount}</p>
+                                </div>
 
                             </div>
                         </div>
@@ -139,25 +128,25 @@ const SingleOrderDetail = ({ order }) => {
                             <div className=' w-full my-3 space-y-4'>
                                 <h4 className="text-base  font-semibold leading-5 text-gray-800 pb-4">{currentOrder?.status === "Pending" ? `Select Driver` : 'Driver details'}</h4>
                                 <span className='text-sm text-gray-600'>
-                                {currentOrder?.status === "Pending" ? <DriverSelect driverValue={currentOrder?.driverInfo} setDriverValue={setCurrentOrder} allDrivers={drivers} /> : `${currentOrder?.driverInfo?.name} ${currentOrder?.driverInfo?.mob_no}`}
+                                    {currentOrder?.status === "Pending" ? <DriverSelect driverValue={currentOrder?.driverInfo} setDriverValue={setCurrentOrder} /> : `${currentOrder?.driverInfo?.name} ${currentOrder?.driverInfo?.mob_no}`}
 
                                 </span>
                                 <hr />
                                 <h4 className="text-base  font-semibold leading-5 text-gray-800 pb-4">Delivery Time</h4>
                                 <span className='text-sm text-gray-600 '>
-                                {currentOrder?.status === "Pending" ? <Input
-                                    label='Estimated Delivery Time'
-                                    type='text'
-                                    value={currentOrder?.deliveryTime ?? ""}
-                                    onChange={(v) => {
-                                        setCurrentOrder(prev => ({
-                                            ...prev,
-                                            deliveryTime: v.target?.value
-                                        }))
-                                    }}
-                                /> : currentOrder?.deliveryTime}
+                                    {currentOrder?.status === "Pending" ? <Input
+                                        label='Estimated Delivery Time'
+                                        type='text'
+                                        value={currentOrder?.deliveryTime ?? ""}
+                                        onChange={(v) => {
+                                            setCurrentOrder(prev => ({
+                                                ...prev,
+                                                deliveryTime: v.target?.value
+                                            }))
+                                        }}
+                                    /> : currentOrder?.deliveryTime}
                                 </span>
-                                
+
                             </div>
                             <h3 className="text-base  font-semibold leading-5 text-gray-800 my-2">Customer</h3>
                             <div className="flex flex-col md:flex-row xl:flex-col justify-start items-stretch h-full w-full md:space-x-6 lg:space-x-8 xl:space-x-0">
