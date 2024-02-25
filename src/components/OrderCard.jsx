@@ -62,47 +62,47 @@ const OrderCard = ({ item, status, orderId }) => {
                     </div>
                 </div>
             </Card> */}
-            <Card 
-                className="max-w-md cursor-pointer border-2 border-gray-300 bg-white " 
+            <Card
+                className="max-w-md cursor-pointer border-2 border-gray-300 bg-white "
                 onClick={() => navigate(`${orderId}`)}
             >
-                
+
                 <CardBody className='space-y-1 px-4 py-2'>
                     <div className="grid grid-cols-2">
                         <Typography color="blue-gray" className="text-sm font-medium tracking-wide">
                             Name
                         </Typography>
                         <Typography color="blue-gray" className="text-sm font-medium tracking-wide">
-                        {item?.name}
+                            {item?.name}
                         </Typography>
                     </div>
                     <div className="grid grid-cols-2">
                         <Typography color="blue-gray" className="text-sm font-medium tracking-wide">
-                           PhoneNo
+                            PhoneNo
                         </Typography>
                         <Typography color="blue-gray" className="text-sm font-medium tracking-wide">
-                        {item?.phoneNo}
-                        </Typography>
-                    </div>
-                    <div className="grid grid-cols-2">
-                        <Typography color="blue-gray" className="text-sm font-medium tracking-wide">
-                           Date
-                        </Typography>
-                        <Typography color="blue-gray" className="text-sm font-medium tracking-wide">
-                            {item?.time ? formatDateTime(item?.time).slice(0,11) : ""}
+                            {item?.phoneNo}
                         </Typography>
                     </div>
                     <div className="grid grid-cols-2">
                         <Typography color="blue-gray" className="text-sm font-medium tracking-wide">
-                           Time
+                            Date
                         </Typography>
                         <Typography color="blue-gray" className="text-sm font-medium tracking-wide">
-                            {item?.time ? formatDateTime(item?.time).slice(12,) : ""}
+                            {item?.time ? formatDateTime(item?.time).slice(0, 11) : ""}
                         </Typography>
                     </div>
                     <div className="grid grid-cols-2">
                         <Typography color="blue-gray" className="text-sm font-medium tracking-wide">
-                           Payment Status
+                            Time
+                        </Typography>
+                        <Typography color="blue-gray" className="text-sm font-medium tracking-wide">
+                            {item?.time ? formatDateTime(item?.time).slice(11,) : ""}
+                        </Typography>
+                    </div>
+                    <div className="grid grid-cols-2">
+                        <Typography color="blue-gray" className="text-sm font-medium tracking-wide">
+                            Payment Status
                         </Typography>
                         <Typography color="blue-gray" className="text-sm font-medium tracking-wide">
                             {item?.status == "Pending" ? "Pending" : "Completed"}
@@ -110,23 +110,23 @@ const OrderCard = ({ item, status, orderId }) => {
                     </div>
                     <div className="grid grid-cols-2">
                         <Typography color="blue-gray" className="text-sm font-medium tracking-wide">
-                           Order Status
+                            Order Status
                         </Typography>
-                        <Typography color="blue-gray"  className={`${item?.status === "Pending" ? "text-red-500" : (item?.status === "Confirm" ? "text-green-500" : "text-blue-500")}`}>
+                        <Typography color="blue-gray" className={`${item?.status === "Pending" ? "text-red-500" : (item?.status === "Confirm" ? "text-green-500" : "text-blue-500")}`}>
                             {item?.status}
                         </Typography>
                     </div>
                     <hr />
                     <div className="grid grid-cols-2">
                         <Typography className="text-sm font-semibold">
-                            Total Price : 
+                            Total Price :
                         </Typography>
                         <Typography className="text-sm font-semibold">
-                        Rs {item?.totalAmount}
+                            Rs {item?.totalAmount}
                         </Typography>
                     </div>
                 </CardBody>
-            
+
             </Card>
         </>
     )
