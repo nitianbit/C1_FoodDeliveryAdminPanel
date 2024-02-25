@@ -139,19 +139,6 @@ const Orders = () => {
     <Tabs value="pending" className="mt-7 h-[82vh]">
       <TabsHeader className="flex items-center justify-between">
         <h1 className='text-3xl font-bold tracking-wide'>Orders Detail</h1>
-        {/* <div className="flex items-center gap-1">
-          {data.map(({ label, value, icon }) => (
-            <Tab key={value} value={value} className="" onClick={() => {
-              setStatus(label)
-            }}>
-              <div className="flex items-center gap-2">
-                {React.createElement(icon, { className: "w-5 h-5" })}
-                {label}
-              </div>
-            </Tab>
-          ))}
-
-        </div > */}
         <div className="flex items-center gap-1">
           {data.map(({ label, value, icon }) => (
             <Tab key={value} value={value} className="" onClick={() => setStatus(label)}>
