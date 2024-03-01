@@ -15,11 +15,6 @@ const MenuSingleCard = ({ open, handleOpen, item, onSuccess, confirmhandleOpen, 
     return (
         <Card className="w-full max-w-[20rem] shadow-lg">
             <CardHeader floated={false} color="blue-gray">
-                {/* <img
-                    src="/kdahipaneer.jpg"
-                    alt="paneer"
-                    className="w-full object-cover"
-                /> */}
                 <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
             </CardHeader>
             <CardBody>
@@ -66,7 +61,7 @@ const MenuSingleCard = ({ open, handleOpen, item, onSuccess, confirmhandleOpen, 
                     >
                         <CiEdit />
                     </span>
-                    
+
                     <span
                         className="text-orange-700 cursor-pointer p-1 rounded-full hover:scale-125 duration-500"
                         onClick={
