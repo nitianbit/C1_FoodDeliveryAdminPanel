@@ -1,6 +1,6 @@
-import { Avatar, Button, Card, CardBody, CardFooter, CardHeader, Typography } from '@material-tailwind/react'
+import { Card, CardBody,Typography } from '@material-tailwind/react'
 import React, { useEffect, useState } from 'react'
-import { NavLink, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import moment from 'moment/moment'
 
 const OrderCard = ({ item, status, orderId }) => {
