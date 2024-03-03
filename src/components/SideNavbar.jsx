@@ -23,7 +23,7 @@ const SideNavbar = () => {
     const { logout } = useUserContext()
 
     return (
-        <Card className="h-[calc(100vh)] w-full max-w-[14rem] p-4 shadow-xl shadow-blue-gray-900/5">
+        <Card className="h-[calc(100vh)] w-full max-w-[14rem] p-4 shadow-xl shadow-blue-gray-900/5 ">
             <div className="mb-2 flex items-center gap-4 p-4">
                 <img src="/logo.jpg" alt="brand" className="h-8 w-8" />
                 <Typography variant="h6" color="blue-gray">

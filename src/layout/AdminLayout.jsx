@@ -20,7 +20,7 @@ const AdminLayout = () => {
     return (
         <div className='w-screen h-screen overflow-hidden'>
             <div className='w-full h-full flex '>
-                <div>
+                <div className='shadow-md'>
                     <SideNavbar />
                 </div>
                 <div className='w-full m-5'>
