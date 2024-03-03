@@ -2,17 +2,17 @@ import React, { useState } from 'react'
 import Datepicker from 'react-tailwindcss-datepicker';
 import { CiSearch } from "react-icons/ci";
 import { IconButton } from '@material-tailwind/react';
-const DatePicker = () => {
+import moment from 'moment'
+const DatePicker = ({ onSearch }) => {
   const [value, setValue] = useState({
-    startDate: new Date(),
-    endDate: new Date().setMonth(11)
+    startDate: "",
+    endDate: ""
   });
 
   const handleValueChange = newValue => {
-    console.log("newValue:", newValue);
     setValue(newValue);
   };
-  // console.log(value)
+
   return (
     <div className=' w-[280px] flex items-center gap-1'>
       <Datepicker
@@ -26,7 +26,24 @@ const DatePicker = () => {
 
       <div className="flex w-max gap-4">
 
-        <IconButton ripple={true} className='m-0 h-8 w-8' variant=''>
+        <IconButton onClick={() => {
+          let filterUrl = ``;
+          if (value?.startDate) {
+            filterUrl += `&from=${moment(value?.startDate).unix()}`
+          }
+          if (!value?.startDate && value?.endDate) {
+            filterUrl += `&till=${moment(value?.endDate).unix()}`
+          }
+          if (value?.startDate && value?.endDate) {
+            filterUrl += `&till=${moment(value?.endDate).unix()}`
+          }
+
+          console.log(filterUrl)
+          console.log(value?.from)
+
+          // filterUrl += `?from=${value?.from}&till=${value?.till}`;
+          onSearch(filterUrl)
+        }} ripple={true} className='m-0 h-8 w-8' variant=''>
           <CiSearch className="text-xl" />
         </IconButton>
       </div>

@@ -69,16 +69,14 @@ const Orders = () => {
   const { success, error } = useUserContext()
 
 
-  const getAllOrders = async (e) => {
+  const getAllOrders = async (filterUrl = "") => {
     try {
-      const response = await doGET(ORDER_ENDPOINTS.GET_ALL(status));
+      const response = await doGET(`${ORDER_ENDPOINTS.GET_ALL(status)}${filterUrl}`);
       if (response?.data?.status == 200) {
         setOrderDetails(response?.data?.data)
       }
     } catch (error) { }
   };
-
-
 
 
 
@@ -153,7 +151,9 @@ const Orders = () => {
       <TabsBody className="h-[78vh] overflow-y-auto">
         {data.map(({ value, Component }) => (
           <TabPanel key={value} value={value}>
-            {<Component orderDetails={orderDetails} status={status} onSuccess={getAllOrders} />}
+            {<Component orderDetails={orderDetails} status={status} onSuccess={(e) => {
+              getAllOrders(e)
+            }} />}
           </TabPanel>
         ))}
       </TabsBody>
