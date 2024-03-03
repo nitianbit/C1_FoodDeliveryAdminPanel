@@ -1,7 +1,4 @@
 import { Option, Select } from '@material-tailwind/react'
-<<<<<<< HEAD
-import React from 'react'
-=======
 import React, { useEffect, useState } from 'react'
 import { doGET } from '../../utils/httpUtil';
 import { DRIVER_ENDPOINTS } from '../../utils/constants';
@@ -21,7 +18,6 @@ const DriverSelect = ({ driverValue, setDriverValue }) => {
     useEffect(() => {
         getAllDrivers()
     }, [])
->>>>>>> fec3989a9a1e1b4d7dbc35dea9287b1a6efd0f81
 
 
     const handleDriverChange = (event) => {
@@ -35,25 +31,12 @@ const DriverSelect = ({ driverValue, setDriverValue }) => {
         <Select
             label="Select Driver"
             size='sm'
-<<<<<<< HEAD
             value={driverValue}
-            onChange={(val) => 
-                setDriverValue(prev => ({
-                    ...prev,
-                    driverInfo: val
-                }))
-            }
-        >
-            {
-                (allDrivers ?? [])?.map((item, index) => (
-                    <Option key={index} value={item.name}>{item?.name ?? ""} - {item?.mob_no ?? ""}</Option>
-=======
             onChange={handleDriverChange}
         >
             {
                 (drivers ?? []).map((item, index) => (
                     <Option key={item?._id} value={item?._id}>{item?.name ?? ""} - {item?.mob_no ?? ""}</Option>
->>>>>>> fec3989a9a1e1b4d7dbc35dea9287b1a6efd0f81
                 ))
             }
         </Select>

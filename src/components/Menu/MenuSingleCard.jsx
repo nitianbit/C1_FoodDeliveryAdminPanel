@@ -13,13 +13,13 @@ const MenuSingleCard = ({ open, handleOpen, item, onSuccess, confirmhandleOpen, 
 
 
     return (
-        <Card className="w-full max-w-[20rem] shadow-lg">
+        <Card className="w-full max-w-[20rem] shadow-lg h-48">
             <CardHeader floated={false} color="blue-gray">
                 <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
             </CardHeader>
             <CardBody>
-                <div className="mb-1 flex items-center justify-between">
-                    <Typography variant="h6" color="blue-gray" className="font-bold tracking-wide">
+                <div className="mb-1 flex items-center justify-between gap-1">
+                    <Typography variant="h6" color="blue-gray" className="font-bold tracking-wide h-14 overflow-hidden">
                         {item?.name}
                     </Typography>
                     <Typography

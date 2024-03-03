@@ -1,7 +1,10 @@
 const withMT = require("@material-tailwind/react/utils/withMT");
 
 module.exports = withMT({
-  content: ["./src/**/*.{html,js,jsx}"],
+  content: [
+    "./src/**/*.{html,js,jsx}",
+    "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js"
+  ],
   theme: {
     extend: {},
   },
