@@ -1,4 +1,4 @@
-import { Card, CardBody,Typography } from '@material-tailwind/react'
+import { Card, CardBody, Typography } from '@material-tailwind/react'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import moment from 'moment/moment'
@@ -6,9 +6,14 @@ import moment from 'moment/moment'
 const OrderCard = ({ item, status, orderId }) => {
     const navigate = useNavigate()
     const formatDateTime = (timestamp) => {
-        return moment(timestamp * 1000).format('YYYY-MM-DD HH:mm:ss a');
+        if (timestamp.toString().length > 10) {
+            return moment.unix(timestamp / 1000).format('YYYY-MM-DD HH:mm:ss a');
+        } else {
+            return moment.unix(timestamp).format('YYYY-MM-DD HH:mm:ss a');
+        }
     }
     const [changeStatus, setChangeStatus] = useState('')
+    const [totalGST, setTotalGST] = useState(0)
 
     useEffect(() => {
         setChangeStatus(
@@ -16,6 +21,12 @@ const OrderCard = ({ item, status, orderId }) => {
         );
     }, [status]);
 
+    useEffect(() => {
+        // const totalPriceFunc = () => currentOrder?.items?.reduce((total, curr) => total + curr.quantity * curr.price, 0);
+        const totalGSTFunc = () => item?.items?.reduce((total, curr) => total + (curr.quantity * curr.price * (curr?.gst ?? 0) / 100), 0);
+        // setGrandTotalPrice(totalPriceFunc())
+        setTotalGST(totalGSTFunc())
+    }, [])
     return (
         <>
             {/* <Card
@@ -122,7 +133,7 @@ const OrderCard = ({ item, status, orderId }) => {
                             Total Price :
                         </Typography>
                         <Typography className="text-sm font-semibold">
-                            Rs {item?.totalAmount}
+                            Rs {item?.totalAmount + totalGST}
                         </Typography>
                     </div>
                 </CardBody>

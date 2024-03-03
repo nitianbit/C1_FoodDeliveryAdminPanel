@@ -54,13 +54,13 @@ const MenuSingleCard = ({ open, handleOpen, item, onSuccess, confirmhandleOpen, 
                     </div>
                     <div className="text-black">
                         <span className="font-bold">Gst : </span>
-                        <span className="text-sm"> 1000 % </span>
+                        <span className="text-sm"> {item?.gst ?? 0} % </span>
                     </div>
                 </div>
                 <div className="flex items-center justify-between">
                     <div className="text-black">
                         <span className="font-bold">MaxQuantity : </span>
-                        <span className="text-sm"> 1000 </span>
+                        <span className="text-sm"> {item?.maxQuantity ?? 1000} </span>
                     </div>
                     <div className="text-xl flex items-center gap-3">
                         <span

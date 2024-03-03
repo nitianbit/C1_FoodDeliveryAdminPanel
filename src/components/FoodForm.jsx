@@ -88,12 +88,12 @@ const FoodForm = ({ handleOpen, formData, setFormData, onSuccess, open, editId, 
                     />
                     <Input
                         required
-                        label="Maximum Quanity" type="text" id="maxQuantity" name="maxQuantity"
+                        label="Maximum Quanity" type="number" id="maxQuantity" name="maxQuantity"
                         value={formData?.maxQuantity} onChange={handleChange}
                     />
                     <Input
                         required
-                        label="Gst" type="text" id="gst" name="gst"
+                        label="Gst" type="number" id="gst" name="gst"
                         value={formData?.gst} onChange={handleChange}
                     />
                     <Button type="submit" className=" w-full tracking-wider">

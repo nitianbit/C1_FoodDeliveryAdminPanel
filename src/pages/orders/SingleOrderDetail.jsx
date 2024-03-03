@@ -19,7 +19,7 @@ const SingleOrderDetail = ({ order }) => {
     })
     const [currentOrderStatus, setCurrentOrderStatus] = useState("Pending")
     const { success, error } = useUserContext()
-
+    const [totalGST, setTotalGST] = useState(0)
     const getCurrentOrderDetails = async (e) => {
         try {
             const response = await doGET(ORDER_ENDPOINTS.GET_ID(id));
@@ -57,6 +57,11 @@ const SingleOrderDetail = ({ order }) => {
     useEffect(() => {
         getCurrentOrderDetails()
     }, [])
+
+    useEffect(() => {
+        const totalGSTFunc = () => currentOrder?.items?.reduce((total, curr) => total + (curr.quantity * curr.price * (curr?.gst ?? 0) / 100), 0);
+        setTotalGST(totalGSTFunc())
+    }, [currentOrder?.items])
 
     useEffect(() => {
         const status = currentOrder?.status === "Pending" ? "Confirm" : "Delivered"
@@ -110,7 +115,7 @@ const SingleOrderDetail = ({ order }) => {
                                             <div className="flex justify-between items-center w-full">
                                                 <p className="text-lg text-center w-20 leading-6 text-gray-600">{oitem?.quantity ?? 0}</p>
                                                 <p className="text-lg text-center w-12 leading-6 text-gray-600">{oitem?.price ?? 0}</p>
-                                                <p className="text-lg text-center w-12 leading-6 text-gray-600">{oitem?.gst ?? 10}%</p>
+                                                <p className="text-lg text-center w-12 leading-6 text-gray-600">{oitem?.gst ?? 0}%</p>
                                                 <p className="text-lg text-center w-12 leading-6 text-gray-600">{(oitem?.price ?? 0) * (oitem?.quantity ?? 0)} </p>
                                             </div>
                                         </div>
@@ -125,11 +130,11 @@ const SingleOrderDetail = ({ order }) => {
                                 </div>
                                 <div className="flex justify-between items-center w-full px-5">
                                     <p className="text-lg leading-4 text-gray-900">Gst</p>
-                                    <p className="text-lg leading-4 text-gray-800">15 %</p>
+                                    <p className="text-lg leading-4 text-gray-800">Rs {totalGST} </p>
                                 </div>
                                 <div className="flex justify-between items-center w-full px-5">
                                     <p className="text-lg  font-semibold leading-4 text-gray-900">Grand Total</p>
-                                    <p className="text-lg  font-semibold leading-4 text-gray-800">Rs 1500</p>
+                                    <p className="text-lg  font-semibold leading-4 text-gray-800">Rs {totalGST ?? 0 + currentOrder?.totalAmount ?? 0}</p>
                                 </div>
                             </div>
                         </div>
