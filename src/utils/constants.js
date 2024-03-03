@@ -7,7 +7,7 @@ export const API_METHODS = {
 
 // export const BASE_URL = "http://localhost:5400";
 // export const BASE_URL = "https://delivery-bac.onrender.com"
-// export const BASE_URL = "https://rotibasket.shop/api"
+// export const BASE_URL = "https://rotibasket.shop"
 export const BASE_URL = ""
 export const CONTENT_TYPE_URL_ENCODED = "application/x-www-form-urlencoded"
 

@@ -23,20 +23,18 @@ const SideNavbar = () => {
     const { logout } = useUserContext()
 
     return (
-        <Card className="h-[100%] w-full max-w-[15rem] p-4 shadow-xl shadow-blue-gray-900/5 border-r-2">
+        <Card className="h-[calc(100vh)] w-full max-w-[14rem] p-4 shadow-xl shadow-blue-gray-900/5 hidden md:block">
             <div className="mb-2 flex items-center gap-4 p-4">
                 <img src="/logo.jpg" alt="brand" className="h-8 w-8" />
                 <Typography variant="h6" color="blue-gray">
                     ChapatiBasket
                 </Typography>
             </div>
-            {/* <div className="p-2">
-                <Input icon={<MagnifyingGlassIcon className="h-5 w-5" />} label="Search" />
-            </div> */}
-            <List className="mt-5">
+            
+            <List className="mt-5 text-gray-900">
 
-                <NavLink to="/dashboard">
-                    <ListItem className="" >
+                <NavLink to="/dashboard" end className={({ isActive }) => (isActive ? 'border-r-4 border-gray-800 max-w-[12.5rem] rounded-md' : 'max-w-[12.5rem] rounded-md')}>
+                    <ListItem className="border-gray-800" >
                         <ListItemPrefix>
                             <PresentationChartBarIcon className="h-5 w-5" />
                         </ListItemPrefix>
@@ -46,8 +44,8 @@ const SideNavbar = () => {
                     </ListItem>
                 </NavLink>
 
-                <NavLink to="/dashboard/menus">
-                    <ListItem>
+                <NavLink to="/dashboard/menus" className={({ isActive }) => (isActive ? 'border-r-4 border-gray-800 max-w-[12.5rem] rounded-md' : 'max-w-[12.5rem] rounded-md')}>
+                    <ListItem className="border-gray-800">
                         <ListItemPrefix>
                             <ShoppingBagIcon className="h-5 w-5" />
                         </ListItemPrefix>
@@ -57,8 +55,8 @@ const SideNavbar = () => {
                     </ListItem>
                 </NavLink>
 
-                <NavLink to="/dashboard/orders">
-                    <ListItem>
+                <NavLink to="/dashboard/orders" className={({ isActive }) => (isActive ? 'border-r-4 border-gray-800 max-w-[12.5rem] rounded-md' : 'max-w-[12.5rem] rounded-md')}>
+                    <ListItem className="border-gray-800">
                         <ListItemPrefix>
                             <InboxIcon className="h-5 w-5" />
                         </ListItemPrefix>
@@ -69,8 +67,8 @@ const SideNavbar = () => {
                     </ListItem>
                 </NavLink>
 
-                <NavLink to="/dashboard/drivers">
-                    <ListItem>
+                <NavLink to="/dashboard/drivers" className={({ isActive }) => (isActive ? 'border-r-4 border-gray-800 max-w-[12.5rem] rounded-md' : 'max-w-[12.5rem] rounded-md')}>
+                    <ListItem className="border-gray-800">
                         <ListItemPrefix>
                             <UserCircleIcon className="h-5 w-5" />
                         </ListItemPrefix>

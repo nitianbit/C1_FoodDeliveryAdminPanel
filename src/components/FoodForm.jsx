@@ -86,11 +86,16 @@ const FoodForm = ({ handleOpen, formData, setFormData, onSuccess, open, editId, 
                         label="Price" type="text" id="price" name="price"
                         value={formData?.price} onChange={handleChange}
                     />
-                    {/* <Input
-                        label="Rating" type="text" id="rating" name="rating"
-                        value={formData.rating} onChange={handleChange}
+                    <Input
+                        required
+                        label="Maximum Quanity" type="number" id="maxQuantity" name="maxQuantity"
+                        value={formData?.maxQuantity} onChange={handleChange}
                     />
-                    <input label="Add Image" type="file" id="image" name="image" onChange={handleImageChange} className="w-full border rounded-md px-4 py-2" accept="image/*" required /> */}
+                    <Input
+                        required
+                        label="Gst" type="number" id="gst" name="gst"
+                        value={formData?.gst} onChange={handleChange}
+                    />
                     <Button type="submit" className=" w-full tracking-wider">
                         Submit
                     </Button>

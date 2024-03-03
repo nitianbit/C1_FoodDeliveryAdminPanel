@@ -37,10 +37,11 @@ const Dashboard = () => {
   return (
     <div>
       <div className='space-y-6 mt-6'>
-        <div className='flex items-center' >
+        <div className='flex items-center justify-between' >
           <h1 className='text-4xl font-bold tracking-wide'>Dashboard</h1>
-          <div></div>
+          
         </div>
+        
         <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5'>
           <DashboardSingleItem color="bg-blue-300" title="Total Orders This Month" number={data?.totalOrders} src="/package-delivery.png"/>
           <DashboardSingleItem color="bg-green-300" title="Total Menu Items" number={data?.totalMenuItems} src="shop.png"/>

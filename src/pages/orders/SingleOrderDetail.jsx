@@ -19,7 +19,7 @@ const SingleOrderDetail = ({ order }) => {
     })
     const [currentOrderStatus, setCurrentOrderStatus] = useState("Pending")
     const { success, error } = useUserContext()
-
+    const [totalGST, setTotalGST] = useState(0)
     const getCurrentOrderDetails = async (e) => {
         try {
             const response = await doGET(ORDER_ENDPOINTS.GET_ID(id));
@@ -59,6 +59,11 @@ const SingleOrderDetail = ({ order }) => {
     }, [])
 
     useEffect(() => {
+        const totalGSTFunc = () => currentOrder?.items?.reduce((total, curr) => total + (curr.quantity * curr.price * (curr?.gst ?? 0) / 100), 0);
+        setTotalGST(totalGSTFunc())
+    }, [currentOrder?.items])
+
+    useEffect(() => {
         const status = currentOrder?.status === "Pending" ? "Confirm" : "Delivered"
         setCurrentOrderStatus(status)
     }, [currentOrder?.status])
@@ -92,12 +97,13 @@ const SingleOrderDetail = ({ order }) => {
 
                                 <div className=" md:flex-row flex-col flex items-start justify-between w-full p-2 space-y-4 md:space-y-0">
                                     <div className="w-full flex flex-col justify-start items-start space-y-2">
-                                        <p className="text-lg md:text-xl font-semibold leading-6 xl:leading-5 text-gray-800">Food Detail Cart</p>
+                                        <p className="text-lg md:text-xl font-semibold leading-6 text-gray-800">Food Detail Cart</p>
                                     </div>
-                                    <div className="flex justify-between space-x-8 items-center w-full">
-                                        <p className="text-lg leading-6">Price</p>
-                                        <p className="text-lg leading-6 text-gray-800">Quantity</p>
-                                        <p className="text-lg font-semibold leading-6 text-gray-800">Total</p>
+                                    <div className="flex justify-between items-center w-full">
+                                        <p className="text-lg text-center w-20 leading-6 text-gray-800">Quantity</p>
+                                        <p className="text-lg text-center w-12 leading-6">Price</p>
+                                        <p className="text-lg text-center w-12 leading-6 text-gray-800">Gst</p>
+                                        <p className="text-lg text-center w-12 font-semibold leading-6 text-gray-800">Total</p>
                                     </div>
                                 </div>
                                 <div className=" w-full bg-white">
@@ -106,22 +112,30 @@ const SingleOrderDetail = ({ order }) => {
                                             <div className="w-full flex flex-col justify-start items-start space-y-2">
                                                 <h3 className="text-lg font-semibold leading-6 text-gray-600">{oitem?.name ?? ""}</h3>
                                             </div>
-                                            <div className="flex justify-between space-x-8 items-center w-full">
-                                                <p className="text-lg leading-6 text-gray-600">{oitem?.price ?? 0}</p>
-                                                <p className="text-lg leading-6 text-gray-600">{oitem?.quantity ?? 0}</p>
-                                                <p className="text-lg leading-6 text-gray-600">{(oitem?.price ?? 0) * (oitem?.quantity ?? 0)} </p>
+                                            <div className="flex justify-between items-center w-full">
+                                                <p className="text-lg text-center w-20 leading-6 text-gray-600">{oitem?.quantity ?? 0}</p>
+                                                <p className="text-lg text-center w-12 leading-6 text-gray-600">{oitem?.price ?? 0}</p>
+                                                <p className="text-lg text-center w-12 leading-6 text-gray-600">{oitem?.gst ?? 0}%</p>
+                                                <p className="text-lg text-center w-12 leading-6 text-gray-600">{(oitem?.price ?? 0) * (oitem?.quantity ?? 0)} </p>
                                             </div>
                                         </div>
                                     ))}
                                 </div>
                             </div>
 
-                            <div className="flex justify-center md:flex-row flex-col items-stretch w-full space-y-4 md:space-y-0 ">
+                            <div className="flex justify-center flex-col items-stretch w-full gap-4 md:space-y-0 py-5">
                                 <div className="flex justify-between items-center w-full px-5">
-                                    <p className="text-lg  font-semibold leading-4 text-gray-900">Total</p>
-                                    <p className="text-lg  font-semibold leading-4 text-gray-800">Rs {currentOrder?.totalAmount}</p>
+                                    <p className="text-lg leading-4 text-gray-900">Total</p>
+                                    <p className="text-lg leading-4 text-gray-800">Rs {currentOrder?.totalAmount}</p>
                                 </div>
-
+                                <div className="flex justify-between items-center w-full px-5">
+                                    <p className="text-lg leading-4 text-gray-900">Gst</p>
+                                    <p className="text-lg leading-4 text-gray-800">Rs {totalGST} </p>
+                                </div>
+                                <div className="flex justify-between items-center w-full px-5">
+                                    <p className="text-lg  font-semibold leading-4 text-gray-900">Grand Total</p>
+                                    <p className="text-lg  font-semibold leading-4 text-gray-800">Rs {totalGST ?? 0 + currentOrder?.totalAmount ?? 0}</p>
+                                </div>
                             </div>
                         </div>
                         <div className="bg-gray-50 dark:bg-gray-800 w-full xl:w-96 flex justify-between items-center md:items-start px-4 py-6 md:p-4 xl:p-4 flex-col">

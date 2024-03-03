@@ -69,16 +69,14 @@ const Orders = () => {
   const { success, error } = useUserContext()
 
 
-  const getAllOrders = async (e) => {
+  const getAllOrders = async (filterUrl = "") => {
     try {
-      const response = await doGET(ORDER_ENDPOINTS.GET_ALL(status));
+      const response = await doGET(`${ORDER_ENDPOINTS.GET_ALL(status)}${filterUrl}`);
       if (response?.data?.status == 200) {
         setOrderDetails(response?.data?.data)
       }
     } catch (error) { }
   };
-
-
 
 
 
@@ -137,7 +135,7 @@ const Orders = () => {
 
   return (
     <Tabs value="pending" className="mt-7 h-[82vh]">
-      <TabsHeader className="flex items-center justify-between">
+      <TabsHeader className="flex flex-col text-center md:flex-row md:items-center justify-between">
         <h1 className='text-3xl font-bold tracking-wide'>Orders Detail</h1>
         <div className="flex items-center gap-1">
           {data.map(({ label, value, icon }) => (
@@ -153,11 +151,13 @@ const Orders = () => {
       <TabsBody className="h-[78vh] overflow-y-auto">
         {data.map(({ value, Component }) => (
           <TabPanel key={value} value={value}>
-            {<Component orderDetails={orderDetails} status={status} onSuccess={getAllOrders} />}
+            {<Component orderDetails={orderDetails} status={status} onSuccess={(e) => {
+              getAllOrders(e)
+            }} />}
           </TabPanel>
         ))}
       </TabsBody>
-    </Tabs >
+    </Tabs>
   )
 }
 
