@@ -13,18 +13,18 @@ const MenuSingleCard = ({ open, handleOpen, item, onSuccess, confirmhandleOpen, 
 
 
     return (
-        <Card className="w-full max-w-[20rem] shadow-lg h-48">
-            <CardHeader floated={false} color="blue-gray">
+        <Card className="w-full max-w-[20rem] shadow-lg h-[220px]">
+            <CardHeader floated={false} color="blue-gray" className="mt-1">
                 <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
             </CardHeader>
-            <CardBody>
-                <div className="mb-1 flex items-center justify-between gap-1">
+            <CardBody className="-mb-1">
+                <div className="mb-1 flex items-start justify-between gap-1">
                     <Typography variant="h6" color="blue-gray" className="font-bold tracking-wide h-14 overflow-hidden">
                         {item?.name}
                     </Typography>
                     <Typography
                         color="blue-gray"
-                        className="flex items-center gap-1.5 text-sm font-bold"
+                        className="flex w-fill h-full  gap-1.5 text-sm font-bold"
                     >
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -44,35 +44,47 @@ const MenuSingleCard = ({ open, handleOpen, item, onSuccess, confirmhandleOpen, 
                 <Typography color="gray" className="text-sm">
                     {item?.description}
                 </Typography>
-
             </CardBody>
-            <CardFooter className="pt-3 flex items-center justify-between">
-                <div className="text-black">
-                    <span className="font-bold">Price : </span>
-                    <span className="text-sm">Rs {item?.price}</span>
-                </div>
-                <div className="text-xl flex items-center gap-3">
-                    <span
-                        className="text-green-800 cursor-pointer p-1 rounded-full hover:scale-125 duration-500"
-                        onClick={() => {
-                            setEditId(item?._id)
-                            handleOpen()
-                        }}
-                    >
-                        <CiEdit />
-                    </span>
+            <CardFooter className="pt-3 flex flex-col">
+                <div className="flex items-center justify-between">
 
-                    <span
-                        className="text-orange-700 cursor-pointer p-1 rounded-full hover:scale-125 duration-500"
-                        onClick={
-                            () => {
-                                confirmhandleOpen()
-                                setDeleteId(item?._id)
+                    <div className="text-black">
+                        <span className="font-bold">Price : </span>
+                        <span className="text-sm">Rs {item?.price}</span>
+                    </div>
+                    <div className="text-black">
+                        <span className="font-bold">Gst : </span>
+                        <span className="text-sm"> 1000 % </span>
+                    </div>
+                </div>
+                <div className="flex items-center justify-between">
+                    <div className="text-black">
+                        <span className="font-bold">MaxQuantity : </span>
+                        <span className="text-sm"> 1000 </span>
+                    </div>
+                    <div className="text-xl flex items-center gap-3">
+                        <span
+                            className="text-green-800 cursor-pointer p-1 rounded-full hover:scale-125 duration-500"
+                            onClick={() => {
+                                setEditId(item?._id)
+                                handleOpen()
+                            }}
+                        >
+                            <CiEdit />
+                        </span>
+
+                        <span
+                            className="text-orange-700 cursor-pointer p-1 rounded-full hover:scale-125 duration-500"
+                            onClick={
+                                () => {
+                                    confirmhandleOpen()
+                                    setDeleteId(item?._id)
+                                }
                             }
-                        }
-                    >
-                        <MdDelete />
-                    </span>
+                        >
+                            <MdDelete />
+                        </span>
+                    </div>
                 </div>
             </CardFooter>
         </Card>

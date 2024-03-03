@@ -2,7 +2,6 @@ import { useEffect, useState } from "react"
 import DashboardSingleItem from "../components/DashboardSingleItem"
 import { USER } from "../utils/constants"
 import { doGET } from "../utils/httpUtil"
-import DatePicker from "../components/DatePicker"
 
 const items = [
   { color: "bg-blue-300", title: "Total Place Order", number: 7, src: "/shop.png" },
@@ -40,9 +39,7 @@ const Dashboard = () => {
       <div className='space-y-6 mt-6'>
         <div className='flex items-center justify-between' >
           <h1 className='text-4xl font-bold tracking-wide'>Dashboard</h1>
-          <div className="w-64">
-            <DatePicker />
-          </div>
+          
         </div>
         
         <div className='grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-5'>
