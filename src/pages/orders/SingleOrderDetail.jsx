@@ -126,7 +126,7 @@ const SingleOrderDetail = ({ order }) => {
                             <div className="flex justify-center flex-col items-stretch w-full gap-4 md:space-y-0 py-5">
                                 <div className="flex justify-between items-center w-full px-5">
                                     <p className="text-lg leading-4 text-gray-900">Total</p>
-                                    <p className="text-lg leading-4 text-gray-800">Rs {currentOrder?.totalAmount}</p>
+                                    <p className="text-lg leading-4 text-gray-800">Rs {currentOrder?.totalAmount - totalGST}</p>
                                 </div>
                                 <div className="flex justify-between items-center w-full px-5">
                                     <p className="text-lg leading-4 text-gray-900">Gst</p>
@@ -134,7 +134,7 @@ const SingleOrderDetail = ({ order }) => {
                                 </div>
                                 <div className="flex justify-between items-center w-full px-5">
                                     <p className="text-lg  font-semibold leading-4 text-gray-900">Grand Total</p>
-                                    <p className="text-lg  font-semibold leading-4 text-gray-800">Rs {totalGST ?? 0 + currentOrder?.totalAmount ?? 0}</p>
+                                    <p className="text-lg  font-semibold leading-4 text-gray-800">Rs { currentOrder?.totalAmount}</p>
                                 </div>
                             </div>
                         </div>
