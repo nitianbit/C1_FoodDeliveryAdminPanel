@@ -133,7 +133,7 @@ const OrderCard = ({ item, status, orderId }) => {
                             Total Price :
                         </Typography>
                         <Typography className="text-sm font-semibold">
-                            Rs {item?.totalAmount + totalGST}
+                            Rs {item?.totalAmount}
                         </Typography>
                     </div>
                 </CardBody>

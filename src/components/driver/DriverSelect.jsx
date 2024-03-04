@@ -31,7 +31,7 @@ const DriverSelect = ({ driverValue, setDriverValue }) => {
         <Select
             label="Select Driver"
             size='sm'
-            value={driverValue}
+            // value={driverValue}
             onChange={handleDriverChange}
         >
             {

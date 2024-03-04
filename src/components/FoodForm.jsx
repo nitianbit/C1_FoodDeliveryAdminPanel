@@ -34,7 +34,7 @@ const FoodForm = ({ handleOpen, formData, setFormData, onSuccess, open, editId, 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        if (!formData?.name || !formData?.description || !formData?.price) {
+        if (!formData?.name || !formData?.description || !formData?.price || !formData?.gst || !formData?.maxQuantity) {
             return error('Please Enter all required Fields');
         }
         try {
