@@ -40,6 +40,9 @@ const AddDriverDialog = ({ open, handleOpen, onSuccess, editId, setEditId }) => 
         if (!driverDetails?.name || !driverDetails?.mob_no) {
             return error('Please Enter all required Fields');
         }
+        if (driverDetails?.mob_no?.length != 10) {
+            return error('Please enter 10 digit Mobile Number');
+        }
         try {
             let response;
 
