@@ -37,6 +37,10 @@ const FoodForm = ({ handleOpen, formData, setFormData, onSuccess, open, editId, 
         if (!formData?.name || !formData?.description || !formData?.price || !formData?.gst || !formData?.maxQuantity) {
             return error('Please Enter all required Fields');
         }
+        if (formData?.description?.length > 70) {
+            return error("Description can be a maximum of two lines only");
+        }
+        
         try {
             let response;
 
