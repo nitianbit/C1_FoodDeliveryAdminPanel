@@ -97,7 +97,7 @@ const Menus = () => {
                     </div>
 
                 </Card>
-                <CardBody className="overflow-y-auto px-0 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5 -mt-8">
+                <CardBody className="w-full grid lg:grid-cols-2 xl:grid-cols-3 overflow-y-auto 2xl:grid-cols-4 gap-5 -mt-8 ">
                     {data?.map((item, index) => (
                         <div key={index}>
                             <MenuSingleCard setDeleteId={setDeleteId} setEditId={setEditId} onSuccess={getAllMenuItems} item={item} open={open} handleOpen={handleOpen} confirmhandleOpen={confirmhandleOpen} />

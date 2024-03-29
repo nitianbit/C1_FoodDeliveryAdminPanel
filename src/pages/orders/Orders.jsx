@@ -136,7 +136,7 @@ const Orders = () => {
   return (
     <Tabs value="pending" className="mt-7 h-[82vh]">
       <TabsHeader className="flex flex-col text-center md:flex-row md:items-center justify-between">
-        <h1 className='text-3xl font-bold tracking-wide'>Orders Detail</h1>
+        <h1 className='text-3xl font-bold tracking-wide'>Order Details</h1>
         <div className="flex items-center gap-1">
           {data.map(({ label, value, icon }) => (
             <Tab key={value} value={value} className="" onClick={() => setStatus(label)}>

@@ -13,7 +13,7 @@ const MenuSingleCard = ({ open, handleOpen, item, onSuccess, confirmhandleOpen, 
 
 
     return (
-        <Card className="w-full max-w-[20rem] shadow-lg h-[220px]">
+        <Card className="w-full max-w-[25rem] shadow-lg h-[220px]">
             <CardHeader floated={false} color="blue-gray" className="mt-1">
                 <div className="to-bg-black-10 absolute inset-0 h-full w-full bg-gradient-to-tr from-transparent via-transparent to-black/60 " />
             </CardHeader>
