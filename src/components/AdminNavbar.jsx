@@ -20,7 +20,7 @@ const AdminNavbar = () => {
             <Navbar className="mx-auto w-full shadow-none p-2 ">
             <div className="relative mx-auto flex items-center justify-between">
                 <div className="flex flex-col gap-">
-                    <h1 className="text-gray-900 font-extrabold text-xl tracking-wide">Welcome to Resturant</h1>
+                    <h1 className="text-gray-900 font-extrabold text-xl tracking-wide">Welcome to Restaurant</h1>
                     <span className="text-gray-700 text-sm">Hello {user?.name ?? "Admin"} , Welcome Back !</span>
                 </div>
                 <ProfileMenu  handleOpen={handleOpen} edithandleOpen={edithandleOpen}/>
