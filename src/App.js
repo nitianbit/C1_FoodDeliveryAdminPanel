@@ -14,11 +14,15 @@ import Orders from "./pages/orders/Orders";
 import SingleOrderDetail from "./pages/orders/SingleOrderDetail";
 import Menus from "./pages/menus/Menus";
 import Drivers from "./pages/Drivers/Drivers";
+import AppTerms from "./terms/src/TermsApp";
+import PrivacyPolicy from "./terms/src/PrivacyPolicy";
 
 const router = createBrowserRouter(createRoutesFromElements(
     <Route path="/" >
 
         <Route index element={<Login />} />
+        <Route path="tnc" element={<AppTerms />} />
+        <Route path="privacy" element={<PrivacyPolicy />} />
         <Route path="register" element={<Register />} />
 
         <Route path="dashboard" element={<AdminLayout />}>
