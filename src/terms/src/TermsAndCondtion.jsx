@@ -6,9 +6,9 @@ const TermsAndCondtion = () => {
         <div className="policy-container">
             <h1>Terms & Conditions</h1>
             <p>Last updated on Jun 23rd 2024</p>
-            <p>
+            {/* <p>
                 For the purpose of these Terms and Conditions, The term "we", "us", "our" used anywhere on this page shall mean REKHA DEVI, whose registered/operational office is New Grain Market, SEc-14 Hisar HARYANA 125001. "you", “your”, "user", “visitor” shall mean any natural or legal person who is visiting our website and/or agreed to purchase from us.
-            </p>
+            </p> */}
             <p>
                 Your use of the website and/or purchase from us are governed by the following Terms and Conditions:
             </p>
